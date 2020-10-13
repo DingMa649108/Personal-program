@@ -35,9 +35,9 @@ public class Role {
 
     //EFFECTS: creat a new character card with no data stored.
     public Role() {
+        name = "None";
         age = 0;
-        gender = null;
-        job = null;
+        gender = "None";
         strength = 0;
         constitution = 0;
         power = 0;

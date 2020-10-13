@@ -21,30 +21,6 @@ public class RoleMaker {
         mainMenu();
     }
 
-    //EFFECTS: display the role card users created
-    public void displayRoleCard(Role role) {
-        System.out.println("Role Card");
-        System.out.println("Name: " + role.getName());
-        System.out.println("Age: " + role.getAge());
-        System.out.println("Gender: " + role.getGender());
-        System.out.println("HP: " + role.getHp() + "\t\tSAN: " + role.getSanity());
-        System.out.println("Job: " + role.getJob().getName());
-        System.out.println("STR: " + role.getStrength() + "\tAPP: " + role.getAppearance());
-        System.out.println("CON: " + role.getConstitution() + "\tSIZ: " + role.getSize());
-        System.out.println("POW: " + role.getPower() + "\tINT: " + role.getIntelligence());
-        System.out.println("DEX: " + role.getDexterity() + "\tEDU: " + role.getEducation());
-        System.out.println("LUC: " + role.getLuck() + "\tDMG: " + role.getBonusDamage());
-        System.out.println("MOV: " + role.getMovement() + "\tCredit: " + role.getCredit());
-        System.out.println("Skills: ");
-        for (Skill s : role.getSkillList()) {
-            System.out.print(s.toString() + ", ");
-        }
-        System.out.println("\nItems: ");
-        for (String item : role.getItemList()) {
-            System.out.print(item + ", ");
-        }
-    }
-
     //EFFECTS: display the main menu for the program and allow users to choose the different actions
     //1.making role card,
     // 2.do in game actions,
@@ -85,9 +61,9 @@ public class RoleMaker {
     // 7.open item menu
     // 8.back to previous menu
     public void cardMenu(Role role) {
-        System.out.println("\nPlease choose one of following\n" + "(please follow the order from 1 to 7)");
-        System.out.println("1. Set name\n" + "2. Set age\n" + "3. Set gender\n" + "4. Set job\n" + "5. Set states\n"
-                + "6. Skill\n" + "7. Item\n" + "8. Previous menu\n");
+        System.out.println("\nPlease choose one of following\n" + "(please follow the order from 1 to 7)\n"
+                + "(Please type 8 after finishing editing)" + "1. Set name\n" + "2. Set age\n" + "3. Set gender\n"
+                + "4. Set job\n" + "5. Set states\n" + "6. Skill\n" + "7. Item\n" + "8. Previous menu\n");
         int choice = input.nextInt();
         input.nextLine();
         if (choice == 1) {
@@ -117,7 +93,7 @@ public class RoleMaker {
     // 3.set Policeman
     // 4.back to previous menu)
     public void jobMenu(Role role) {
-        System.out.println("\nPlease choose one of following jobs");
+        System.out.println("\nPlease choose one of following jobs" + "(Please type 4 after finishing choosing)\n");
         System.out.println("1. Artist\n"
                 + "2. Nurse\n"
                 + "3. Policeman\n"
@@ -148,10 +124,9 @@ public class RoleMaker {
         for (Skill s : role.getSkillList()) {
             System.out.print(s.toString() + ", ");
         }
-        System.out.println("\nPlease choose one of following" + "\n1. Add new skill\n"
-                + "2. Add skill points\n"
-                + "3. Remove skill points\n"
-                + "4. Remove skill"
+        System.out.println("\nPlease choose one of following" + "(Please type 5 after finishing editing)\n"
+                + "\n1. Add new skill\n" + "2. Add skill points\n"
+                + "3. Remove skill points\n" + "4. Remove skill"
                 + "5. Previous menu\n");
         int choice = input.nextInt();
         input.nextLine();
@@ -353,8 +328,7 @@ public class RoleMaker {
     //EFFECTS: ask user to input role's gender, and set role's name to the inputted gender
     public void setGender(Role role) {
         System.out.println("\nPlease enter gender for the role");
-        role.setAge(input.nextInt());
-        input.nextLine();
+        role.setGender(input.nextLine());
     }
 
     //EFFECTS: check if the free skill point is zero.
@@ -363,6 +337,30 @@ public class RoleMaker {
         if (role.getFreeSkillPoints() == 0) {
             System.out.println("Free points is 0 please go set up states and job first");
             mainMenu();
+        }
+    }
+
+    //EFFECTS: display the role card users created
+    public void displayRoleCard(Role role) {
+        System.out.println("Role Card");
+        System.out.println("Name: " + role.getName());
+        System.out.println("Age: " + role.getAge());
+        System.out.println("Gender: " + role.getGender());
+        System.out.println("HP: " + role.getHp() + "\t\tSAN: " + role.getSanity());
+        System.out.println("Job: " + role.getJob().getName());
+        System.out.println("STR: " + role.getStrength() + "\tAPP: " + role.getAppearance());
+        System.out.println("CON: " + role.getConstitution() + "\tSIZ: " + role.getSize());
+        System.out.println("POW: " + role.getPower() + "\tINT: " + role.getIntelligence());
+        System.out.println("DEX: " + role.getDexterity() + "\tEDU: " + role.getEducation());
+        System.out.println("LUC: " + role.getLuck() + "\tDMG: " + role.getBonusDamage());
+        System.out.println("MOV: " + role.getMovement() + "\tCredit: " + role.getCredit());
+        System.out.println("Skills: ");
+        for (Skill s : role.getSkillList()) {
+            System.out.print(s.toString() + ", ");
+        }
+        System.out.println("\nItems: ");
+        for (String item : role.getItemList()) {
+            System.out.print(item + ", ");
         }
     }
 }

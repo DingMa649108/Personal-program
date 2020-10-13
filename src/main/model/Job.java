@@ -13,7 +13,6 @@ public class Job {
         jobName = "None";
         credit = 0;
         skillList = new ArrayList<>();
-        skillList.add(new Skill("None",0));
     }
 
     public String getName() {
