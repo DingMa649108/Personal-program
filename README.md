@@ -2,14 +2,6 @@
 
 ## Proposal
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
-
-An example of text with **bold** and *italic* fonts.  Note that the IntelliJ markdown previewer doesn't seem to render 
-the bold and italic fonts correctly but they will appear correctly on GitHub.
-
 <p>Call of Cthulhu is a **horror fiction role-playing game** based on *H. P. Lovecraft's* story of the same name and the 
 associated *Cthulhu Mythos*. It requires 1 to 8 players and a host to play. Players will 
 make their imaginary characters with unique skills and states. Host will use those characters for a adventure in the 

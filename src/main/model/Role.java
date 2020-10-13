@@ -264,7 +264,9 @@ public class Role {
             movement = 8;
         } else if (strength > size && dexterity > size) {
             movement = 7;
-        } else if (strength > size || dexterity > size) {
+        } else if (strength > size) {
+            movement = 8;
+        } else if (dexterity > size) {
             movement = 8;
         }
         if (age > 60) {

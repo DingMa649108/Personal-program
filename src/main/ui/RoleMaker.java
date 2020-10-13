@@ -17,10 +17,10 @@ public class RoleMaker {
     //EFFECTS: Run the role maker program
     public void runRoleMaker() {
         role = new Role();
-//        displayRoleCard(role);
         mainMenu();
     }
 
+    //MODIFIES: role
     //EFFECTS: display the main menu for the program and allow users to choose the different actions
     //1.making role card,
     // 2.do in game actions,
@@ -199,6 +199,7 @@ public class RoleMaker {
         System.out.println("Free points: " + role.getFreeSkillPoints());
     }
 
+    //MODIFIES: role
     //EFFECTS: display the item menu and allow users to creat and manage their items
     //(1.add a new item to item list
     // 2.remove item  from item list
@@ -290,11 +291,6 @@ public class RoleMaker {
         actionMenu(role);
     }
 
-    //EFFECTS: quit the application
-    public void quit() {
-        System.exit(0);
-    }
-
     //MODIFIES: role
     //EFFECTS: set up user's role's states,
     // and calculate role's hit points, sanity, movement, bonus damage, and free skill points
@@ -357,7 +353,7 @@ public class RoleMaker {
     }
 
     //EFFECTS: display the states of user's role.
-    // Calculate half and fifth value os each states and display then in brackets follow each state
+    // And calculate half and fifth value os each states and display then in brackets follow each state
     public void displayStates(Role role) {
         System.out.println("STR: " + role.getStrength()
                 + "(" + role.halfValue(role.getStrength()) + " " + role.fifthValue(role.getStrength()) + ")"
@@ -379,5 +375,10 @@ public class RoleMaker {
                 + "(" + role.halfValue(role.getLuck()) + " " + role.fifthValue(role.getLuck()) + ")"
                 + "\tDMG: " + role.getBonusDamage());
         System.out.println("MOV: " + role.getMovement() + "\tCredit: " + role.getCredit());
+    }
+
+    //EFFECTS: quit the application
+    public void quit() {
+        System.exit(0);
     }
 }
