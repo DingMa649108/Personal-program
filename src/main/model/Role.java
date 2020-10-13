@@ -262,12 +262,12 @@ public class Role {
             movement = 9;
         } else if (strength == size && dexterity == size) {
             movement = 8;
-        } else if (strength > size && dexterity <= size) {
-            movement = 8;
-        } else if (dexterity > size && strength <= size) {
-            movement = 8;
         } else if (strength > size && dexterity > size) {
             movement = 7;
+        } else if (strength > size) {
+            movement = 8;
+        } else {
+            movement = 8;
         }
         if (age > 60) {
             movement -= 2;
