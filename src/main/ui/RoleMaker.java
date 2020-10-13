@@ -62,7 +62,7 @@ public class RoleMaker {
     // 8.back to previous menu
     public void cardMenu(Role role) {
         System.out.println("\nPlease choose one of following\n" + "(please follow the order from 1 to 7)\n"
-                + "(Please type 8 after finishing editing)" + "1. Set name\n" + "2. Set age\n" + "3. Set gender\n"
+                + "(Please type 8 after finishing editing)\n" + "1. Set name\n" + "2. Set age\n" + "3. Set gender\n"
                 + "4. Set job\n" + "5. Set states\n" + "6. Skill\n" + "7. Item\n" + "8. Previous menu\n");
         int choice = input.nextInt();
         input.nextLine();
@@ -93,7 +93,7 @@ public class RoleMaker {
     // 3.set Policeman
     // 4.back to previous menu)
     public void jobMenu(Role role) {
-        System.out.println("\nPlease choose one of following jobs" + "(Please type 4 after finishing choosing)\n");
+        System.out.println("\nPlease choose one of following jobs" + "\n(Please type 4 after finishing choosing)");
         System.out.println("1. Artist\n"
                 + "2. Nurse\n"
                 + "3. Policeman\n"
@@ -121,12 +121,11 @@ public class RoleMaker {
     // 5.back to previous menu
     public void skillMenu(Role role) {
         System.out.println("Skills: ");
-        for (Skill s : role.getSkillList()) {
-            System.out.print(s.toString() + ", ");
-        }
+        System.out.print(role.getSkillList().toString());
         System.out.println("\nPlease choose one of following" + "(Please type 5 after finishing editing)\n"
+                + "(Please don't change states and job after editing skills)\n"
                 + "\n1. Add new skill\n" + "2. Add skill points\n"
-                + "3. Remove skill points\n" + "4. Remove skill"
+                + "3. Remove skill points\n" + "4. Remove skill\n"
                 + "5. Previous menu\n");
         int choice = input.nextInt();
         input.nextLine();
@@ -335,7 +334,7 @@ public class RoleMaker {
     // Display guidance information and return to main menu if free points is zero, nothing happens otherwise
     public void checkFreeSkillPointIsNotZero(Role role) {
         if (role.getFreeSkillPoints() == 0) {
-            System.out.println("Free points is 0 please go set up states and job first");
+            System.out.println("If free points is 0 before you edit skill, please go set up states and job first");
             mainMenu();
         }
     }
@@ -348,19 +347,37 @@ public class RoleMaker {
         System.out.println("Gender: " + role.getGender());
         System.out.println("HP: " + role.getHp() + "\t\tSAN: " + role.getSanity());
         System.out.println("Job: " + role.getJob().getName());
-        System.out.println("STR: " + role.getStrength() + "\tAPP: " + role.getAppearance());
-        System.out.println("CON: " + role.getConstitution() + "\tSIZ: " + role.getSize());
-        System.out.println("POW: " + role.getPower() + "\tINT: " + role.getIntelligence());
-        System.out.println("DEX: " + role.getDexterity() + "\tEDU: " + role.getEducation());
-        System.out.println("LUC: " + role.getLuck() + "\tDMG: " + role.getBonusDamage());
-        System.out.println("MOV: " + role.getMovement() + "\tCredit: " + role.getCredit());
+        displayStates(role);
         System.out.println("Skills: ");
-        for (Skill s : role.getSkillList()) {
-            System.out.print(s.toString() + ", ");
-        }
+        System.out.print(role.getSkillList().toString());
         System.out.println("\nItems: ");
         for (String item : role.getItemList()) {
             System.out.print(item + ", ");
         }
+    }
+
+    //EFFECTS: display the states of user's role.
+    // Calculate half and fifth value os each states and display then in brackets follow each state
+    public void displayStates(Role role) {
+        System.out.println("STR: " + role.getStrength()
+                + "(" + role.halfValue(role.getStrength()) + " " + role.fifthValue(role.getStrength()) + ")"
+                + "\tAPP: " + role.getAppearance()
+                + "(" + role.halfValue(role.getAppearance()) + " " + role.fifthValue(role.getAppearance()) + ")");
+        System.out.println("CON: " + role.getConstitution()
+                + "(" + role.halfValue(role.getConstitution()) + " " + role.fifthValue(role.getConstitution()) + ")"
+                + "\tSIZ: " + role.getSize()
+                + "(" + role.halfValue(role.getSize()) + " " + role.fifthValue(role.getSize()) + ")");
+        System.out.println("POW: " + role.getPower()
+                + "(" + role.halfValue(role.getPower()) + " " + role.fifthValue(role.getPower()) + ")"
+                + "\tINT: " + role.getIntelligence()
+                + "(" + role.halfValue(role.getIntelligence()) + " " + role.fifthValue(role.getIntelligence()) + ")");
+        System.out.println("DEX: " + role.getDexterity()
+                + "(" + role.halfValue(role.getDexterity()) + " " + role.fifthValue(role.getDexterity()) + ")"
+                + "\tEDU: " + role.getEducation()
+                + "(" + role.halfValue(role.getEducation()) + " " + role.fifthValue(role.getEducation()) + ")");
+        System.out.println("LUC: " + role.getLuck()
+                + "(" + role.halfValue(role.getLuck()) + " " + role.fifthValue(role.getLuck()) + ")"
+                + "\tDMG: " + role.getBonusDamage());
+        System.out.println("MOV: " + role.getMovement() + "\tCredit: " + role.getCredit());
     }
 }

@@ -108,17 +108,50 @@ public class TestRole {
 
     @Test
     public void testSetBonusDamage() {
-        for (int i = 0; i < 100000; i++) {
-            role.setStates();
-            role.setBonusDamage();
-            if ((role.getStrength() + role.getSize()) >= 55 && (role.getStrength() + role.getSize()) < 97) {
-                assertEquals(-1, role.getBonusDamage());
-            } else if ((role.getStrength() + role.getSize()) >= 97 && (role.getStrength() + role.getSize()) < 139) {
-                assertEquals(0, role.getBonusDamage());
-            } else if (((role.getStrength() + role.getSize()) >= 139 && (role.getStrength() + role.getSize()) < 181)) {
-                assertEquals(1, role.getBonusDamage());
-            }
-        }
+        role.setStrength(16);
+        role.setSize(40);
+        role.setBonusDamage();
+        assertEquals(-1, role.getBonusDamage());
+        role.setStrength(60);
+        role.setSize(36);
+        role.setBonusDamage();
+        assertEquals(-1, role.getBonusDamage());
+        role.setStrength(40);
+        role.setSize(40);
+        role.setBonusDamage();
+        assertEquals(-1, role.getBonusDamage());
+        role.setStrength(36);
+        role.setSize(61);
+        role.setBonusDamage();
+        assertEquals(0, role.getBonusDamage());
+        role.setStrength(77);
+        role.setSize(61);
+        role.setBonusDamage();
+        assertEquals(0, role.getBonusDamage());
+        role.setStrength(66);
+        role.setSize(55);
+        role.setBonusDamage();
+        assertEquals(0, role.getBonusDamage());
+        role.setStrength(77);
+        role.setSize(62);
+        role.setBonusDamage();
+        assertEquals(1, role.getBonusDamage());
+        role.setStrength(88);
+        role.setSize(77);
+        role.setBonusDamage();
+        assertEquals(1, role.getBonusDamage());
+        role.setStrength(90);
+        role.setSize(90);
+        role.setBonusDamage();
+        assertEquals(1, role.getBonusDamage());
+        role.setStrength(0);
+        role.setSize(0);
+        role.setBonusDamage();
+        assertEquals(0, role.getBonusDamage());
+        role.setStrength(100);
+        role.setSize(100);
+        role.setBonusDamage();
+        assertEquals(0, role.getBonusDamage());
     }
 
     @Test
@@ -173,29 +206,92 @@ public class TestRole {
     }
 
     @Test
-    public void testSetMovement() {
-        for (int i = 0; i < 10000; i++) {
-            role.setAge(role.rollD100());
+    public void testSetJobSkillPointsNoJob() {
+        for (int i = 0; i < 20; i++) {
             role.setStates();
-            role.setMovement();
-            if (role.getStrength() < role.getSize() && role.getDexterity() < role.getSize()) {
-                if (role.getAge() > 60) {
-                    assertEquals(5, role.getMovement());
-                }
-            } else if (role.getStrength() == role.getSize() && role.getDexterity() == role.getSize()) {
-                if (role.getAge() > 60) {
-                    assertEquals(6, role.getMovement());
-                }
-            } else if (role.getStrength() > role.getSize() || role.getDexterity() > role.getSize()) {
-                if (role.getAge() > 60) {
-                    assertEquals(6, role.getMovement());
-                }
-            } else {
-                if (role.getAge() > 60) {
-                    assertEquals(7, role.getMovement());
-                }
-            }
+            role.setFreeSkillPoints();
+            assertEquals(0, role.getFreeSkillPoints());
         }
+    }
+
+    @Test
+    public void testSetMovementYoung() {
+        role.setAge(60);
+        role.setSize(10);
+        role.setDexterity(5);
+        role.setStrength(5);
+        role.setMovement();
+        assertEquals(9, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(15);
+        role.setStrength(10);
+        role.setMovement();
+        assertEquals(8, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(10);
+        role.setStrength(15);
+        role.setMovement();
+        assertEquals(8, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(5);
+        role.setStrength(15);
+        role.setMovement();
+        assertEquals(8, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(15);
+        role.setStrength(5);
+        role.setMovement();
+        assertEquals(8, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(10);
+        role.setStrength(10);
+        role.setMovement();
+        assertEquals(8, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(15);
+        role.setStrength(15);
+        role.setMovement();
+        assertEquals(7, role.getMovement());
+    }
+
+    @Test
+    public void testSetMovementOld() {
+        role.setAge(61);
+        role.setSize(10);
+        role.setDexterity(5);
+        role.setStrength(5);
+        role.setMovement();
+        assertEquals(7, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(15);
+        role.setStrength(10);
+        role.setMovement();
+        assertEquals(6, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(10);
+        role.setStrength(15);
+        role.setMovement();
+        assertEquals(6, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(5);
+        role.setStrength(15);
+        role.setMovement();
+        assertEquals(6, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(15);
+        role.setStrength(5);
+        role.setMovement();
+        assertEquals(6, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(10);
+        role.setStrength(10);
+        role.setMovement();
+        assertEquals(6, role.getMovement());
+        role.setSize(10);
+        role.setDexterity(15);
+        role.setStrength(15);
+        role.setMovement();
+        assertEquals(5, role.getMovement());
     }
 
     @Test

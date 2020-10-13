@@ -51,6 +51,7 @@ public class Role {
         skillList = new ArrayList<>();
         itemList = new ArrayList<>();
         job = new Job();
+        job.setJob();
     }
 
     public void setName(String name) {
@@ -241,6 +242,8 @@ public class Role {
             this.bonusDamage = 0;
         } else if ((strength + size) >= 139 && (strength + size) < 181) {
             this.bonusDamage = 1;
+        } else {
+            this.bonusDamage = 0;
         }
     }
 
@@ -256,13 +259,13 @@ public class Role {
     // (formula obeys the formula in Call of the Call of Cthulhu Quick-Start Rules 7th Edition)
     public void setMovement() {
         if (strength < size && dexterity < size) {
-            movement = 7;
+            movement = 9;
         } else if (strength == size && dexterity == size) {
             movement = 8;
+        } else if (strength > size && dexterity > size) {
+            movement = 7;
         } else if (strength > size || dexterity > size) {
             movement = 8;
-        } else {
-            movement = 9;
         }
         if (age > 60) {
             movement -= 2;
@@ -284,8 +287,10 @@ public class Role {
             freeSkillPoints = education * 2 + power * 2 + intelligence * 2;
         } else if (job.getName().equalsIgnoreCase("Nurse")) {
             freeSkillPoints = education * 4 + intelligence * 2;
-        } else {
+        } else if (job.getName().equalsIgnoreCase("Policeman")) {
             freeSkillPoints = education * 2 + strength * 2 + intelligence * 2;
+        } else {
+            freeSkillPoints = 0;
         }
     }
 
@@ -397,5 +402,16 @@ public class Role {
         return -1;
     }
 
+    public void setStrength(int str) {
+        strength = str;
+    }
+
+    public void setSize(int siz) {
+        size = siz;
+    }
+
+    public void setDexterity(int dex) {
+        dexterity = dex;
+    }
 
 }
