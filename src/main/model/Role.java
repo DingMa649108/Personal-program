@@ -50,6 +50,7 @@ public class Role {
         freeSkillPoints = 0;
         skillList = new ArrayList<>();
         itemList = new ArrayList<>();
+        job = new Job();
     }
 
     public void setName(String name) {
@@ -314,13 +315,28 @@ public class Role {
 
     //REQUIRES: skill name should exist in current skill list, 0 <= points
     //MODIFIES: this
-    //EFFECTS: remove skill points to given skill. And add given points from free skill points
+    //EFFECTS: remove skill points from given skill. And add given points from free skill points
     //return ture if the subtracting will not make skill negative, false otherwise
     public boolean removeSkillPoints(String name, int points) {
         for (Skill s : skillList) {
             if (s.getSkill().equalsIgnoreCase(name) && points <= s.getSkillPoints()) {
                 s.removeSkillPoints(points);
                 freeSkillPoints += points;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //REQUIRES: skill name should exist in current skill list
+    //MODIFIES: this
+    //EFFECTS: remove the skill with given skill name from the skill list.
+    // Return ture if skill with skill name is in the skill list, false otherwise.
+    public boolean removeSkill(String skillName) {
+        for (int i = 0; i < skillList.size(); i++) {
+            if (skillList.get(i).getSkill().equalsIgnoreCase(skillName)) {
+                skillList.remove(i);
+                freeSkillPoints += skillList.get(i).getSkillPoints();
                 return true;
             }
         }
@@ -380,4 +396,6 @@ public class Role {
         }
         return -1;
     }
+
+
 }

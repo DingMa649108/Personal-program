@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Policeman extends Job {
+    @Override
     public void setJob() {
         this.jobName = "Policeman";
         this.credit = 40;

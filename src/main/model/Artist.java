@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Artist extends Job {
 
+    @Override
     public void setJob() {
         this.jobName = "Artist";
         this.credit = 30;

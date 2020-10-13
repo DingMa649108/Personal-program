@@ -3,13 +3,18 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Job {
+public class Job {
     protected String jobName;     // Job name
     protected int credit;         // A measure of job class
     List<Skill> skillList;        // A list of skill this job have
 
     //EFFECTS: set up all information for a job
-    abstract void setJob();
+    public void setJob() {
+        jobName = "None";
+        credit = 0;
+        skillList = new ArrayList<>();
+        skillList.add(new Skill("None",0));
+    }
 
     public String getName() {
         return jobName;

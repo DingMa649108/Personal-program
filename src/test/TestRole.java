@@ -212,6 +212,38 @@ public class TestRole {
     }
 
     @Test
+    public void testRemoveSkillsInList() {
+        role.setStates();
+        role.setJobArtist();
+        role.setFreeSkillPoints();
+        int points = role.getFreeSkillPoints();
+        role.addSkills("Sleep", 10);
+        role.addSkills("Eat", 10);
+        role.addSkills("Drive", 10);
+        assertEquals(10, role.getSkillList().size());
+        assertEquals(points - 30, role.getFreeSkillPoints());
+        assertTrue(role.removeSkill("sleep"));
+        assertEquals(9, role.getSkillList().size());
+        assertEquals(points - 20, role.getFreeSkillPoints());
+    }
+
+    @Test
+    public void testRemoveSkillsNotInList() {
+        role.setStates();
+        role.setJobArtist();
+        role.setFreeSkillPoints();
+        int points = role.getFreeSkillPoints();
+        role.addSkills("Sleep", 10);
+        role.addSkills("Eat", 10);
+        role.addSkills("Drive", 10);
+        assertEquals(10, role.getSkillList().size());
+        assertEquals(points - 30, role.getFreeSkillPoints());
+        assertFalse(role.removeSkill("jump"));
+        assertEquals(10, role.getSkillList().size());
+        assertEquals(points - 30, role.getFreeSkillPoints());
+    }
+
+    @Test
     public void testAddSkillPoints() {
         role.setStates();
         role.setJobArtist();
