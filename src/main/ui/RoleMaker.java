@@ -20,7 +20,7 @@ public class RoleMaker {
         mainMenu();
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: display the main menu for the program and allow users to choose the different actions
     //1.making role card,
     // 2.do in game actions,
@@ -50,7 +50,7 @@ public class RoleMaker {
         mainMenu();
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: display the role menu and allow users to creat and manage their role card
     // 1.set name for role
     // 2.set age for role
@@ -86,7 +86,7 @@ public class RoleMaker {
         cardMenu(role);
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: display the job menu and allow users to choose the job for the role
     //(1.set job to Artist
     // 2.set job to Nurse
@@ -112,7 +112,7 @@ public class RoleMaker {
         jobMenu(role);
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: display the skill menu and allow users to creat and manage their skills
     //(1.add a new skill with skill points to skill list
     // 2.add skill points to a existing skill
@@ -143,7 +143,7 @@ public class RoleMaker {
         skillMenu(role);
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: add a new skill with name and skill points inputted by users
     public void addSkill(Role role) {
         checkFreeSkillPointIsNotZero(role);
@@ -157,7 +157,7 @@ public class RoleMaker {
         System.out.println("Free points: " + role.getFreeSkillPoints());
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: ask users to input skill name and skill points they want to add.
     // Then add inputted skill points to the skill has inputted name
     public void addSkillPoint(Role role) {
@@ -172,7 +172,7 @@ public class RoleMaker {
         System.out.println("Free points: " + role.getFreeSkillPoints());
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: ask users to input skill name and skill points they want to remove.
     // Then remove inputted skill points from the skill has inputted name
     public void removeSkillPoint(Role role) {
@@ -187,7 +187,7 @@ public class RoleMaker {
         System.out.println("Free points: " + role.getFreeSkillPoints());
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: ask users to input skill name they want to remove.
     // Then remove skill with inputted name from the skill list.
     public void removeSkill(Role role) {
@@ -199,7 +199,7 @@ public class RoleMaker {
         System.out.println("Free points: " + role.getFreeSkillPoints());
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: display the item menu and allow users to creat and manage their items
     //(1.add a new item to item list
     // 2.remove item  from item list
@@ -225,7 +225,7 @@ public class RoleMaker {
         itemMenu(role);
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: ask users to input item name they want to add.
     // Than add the item to the item list
     public void addItem(Role role) {
@@ -234,7 +234,7 @@ public class RoleMaker {
         role.addItem(item);
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: ask users to input item name they want to add.
     // Than remove the item to the item list
     public void removeItem(Role role) {
@@ -260,7 +260,7 @@ public class RoleMaker {
         }
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: display the skill menu and allow users to creat and manage their skills
     //(1.add hit points for user's role
     // 2.reduce hit points for user's role
@@ -291,7 +291,7 @@ public class RoleMaker {
         actionMenu(role);
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: set up user's role's states,
     // and calculate role's hit points, sanity, movement, bonus damage, and free skill points
     public void setUpStates(Role role) {
@@ -303,7 +303,7 @@ public class RoleMaker {
         role.setFreeSkillPoints();
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: ask user to input role's name, and set role's name to the inputted name
     public void setName(Role role) {
         System.out.println("\nPlease enter name for the role");
@@ -311,7 +311,7 @@ public class RoleMaker {
         role.setName(name);
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: ask user to input role's age, and set role's name to the inputted age
     public void setAge(Role role) {
         System.out.println("\nPlease enter age for the role");
@@ -319,7 +319,7 @@ public class RoleMaker {
         input.nextLine();
     }
 
-    //MODIFIES: role
+    //MODIFIES: this
     //EFFECTS: ask user to input role's gender, and set role's name to the inputted gender
     public void setGender(Role role) {
         System.out.println("\nPlease enter gender for the role");
