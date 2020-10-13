@@ -6,7 +6,7 @@ import model.Skill;
 import java.util.Scanner;
 
 public class RoleMaker {
-    private Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
     private Role role;
 
     public RoleMaker() {
@@ -38,7 +38,7 @@ public class RoleMaker {
         }
         System.out.println("\nItems: ");
         for (String item : role.getItemList()) {
-            System.out.print(item.toString() + ", ");
+            System.out.print(item + ", ");
         }
     }
 
@@ -145,7 +145,7 @@ public class RoleMaker {
         System.out.println("Please enter skill points");
         int points = input.nextInt();
         input.nextLine();
-        role.addSkills(skillName,points);
+        role.addSkills(skillName, points);
         System.out.println("Free points: " + role.getFreeSkillPoints());
     }
 
@@ -160,7 +160,7 @@ public class RoleMaker {
         System.out.println("Please enter skill points");
         int points = input.nextInt();
         input.nextLine();
-        role.addSkills(skillName,points);
+        role.addSkills(skillName, points);
         System.out.println("Free points: " + role.getFreeSkillPoints());
     }
 
@@ -175,7 +175,7 @@ public class RoleMaker {
         System.out.println("Please enter skill points");
         int points = input.nextInt();
         input.nextLine();
-        role.removeSkillPoints(skillName,points);
+        role.removeSkillPoints(skillName, points);
         System.out.println("Free points: " + role.getFreeSkillPoints());
     }
 

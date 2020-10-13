@@ -25,8 +25,8 @@ public class Role {
     private int movement;           // A measure of how far character can move in one term
     private int sanity;             // Character’s ability to remain stoic in the face of horrors
     private int credit;             // An indicator of character's wealth and class.
-    private List<String> itemList;  // A list of items character has
-    private List<Skill> skillList;  // A list of skills character has
+    private final List<String> itemList;  // A list of items character has
+    private final List<Skill> skillList;  // A list of skills character has
     static final Random d3 = new Random();      // A dice with 3 faces
     static final Random d6 = new Random();      // A dice with 6 faces
     static final Random d20 = new Random();    // A dice with 20 faces
@@ -70,7 +70,7 @@ public class Role {
         this.job = new Artist();
         job.setJob();
         for (int i = 0; i < job.skillList.size(); i++) {
-            skillList.add(i,job.skillList.get(i));
+            skillList.add(i, job.skillList.get(i));
         }
         this.credit = job.getCredit();
     }
@@ -81,7 +81,7 @@ public class Role {
         this.job = new Nurse();
         job.setJob();
         for (int i = 0; i < job.skillList.size(); i++) {
-            skillList.add(i,job.skillList.get(i));
+            skillList.add(i, job.skillList.get(i));
         }
         this.credit = job.getCredit();
     }
@@ -92,7 +92,7 @@ public class Role {
         this.job = new Policeman();
         job.setJob();
         for (int i = 0; i < job.skillList.size(); i++) {
-            skillList.add(i,job.skillList.get(i));
+            skillList.add(i, job.skillList.get(i));
         }
         this.credit = job.getCredit();
     }
@@ -291,8 +291,8 @@ public class Role {
     //REQUIRES: skill name should not be null, 0 <= points <= MAX_STATES
     //MODIFIES: this
     //EFFECTS: add the skill with given name and skill points to the skill list
-    public void addSkills(String skillName,int points) {
-        skillList.add(new Skill(skillName,points));
+    public void addSkills(String skillName, int points) {
+        skillList.add(new Skill(skillName, points));
         freeSkillPoints -= points;
     }
 
@@ -301,7 +301,7 @@ public class Role {
     //EFFECTS: add skill points to given skill. And subtract given points from free skill points
     //return ture if the adding will not make skill point exceed the MAX_STATES, false otherwise
     public boolean addSkillsPoints(String name, int points) {
-        for (Skill s: skillList) {
+        for (Skill s : skillList) {
             if (s.getSkill().equalsIgnoreCase(name)
                     && (points + s.getSkillPoints()) < MAX_STATES) {
                 s.addSkillPoints(points);
@@ -317,7 +317,7 @@ public class Role {
     //EFFECTS: remove skill points to given skill. And add given points from free skill points
     //return ture if the subtracting will not make skill negative, false otherwise
     public boolean removeSkillPoints(String name, int points) {
-        for (Skill s: skillList) {
+        for (Skill s : skillList) {
             if (s.getSkill().equalsIgnoreCase(name) && points <= s.getSkillPoints()) {
                 s.removeSkillPoints(points);
                 freeSkillPoints += points;

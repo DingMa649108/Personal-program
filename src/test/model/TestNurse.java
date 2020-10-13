@@ -9,8 +9,8 @@ public class TestNurse {
     public void testSetJob() {
         Job artist = new Nurse();
         artist.setJob();
-        assertEquals("Nurse",artist.getName());
-        assertEquals(35,artist.getCredit());
-        assertEquals(8,artist.getSkillList().size());
+        assertEquals("Nurse", artist.getName());
+        assertEquals(35, artist.getCredit());
+        assertEquals(8, artist.getSkillList().size());
     }
 }
