@@ -229,16 +229,16 @@ public class TestRole {
     }
     @Test
     public void testAddItem() {
-        role.addItems("Flash Light");
-        role.addItems("Knife");
-        role.addItems("Pills");
+        role.addItem("Flash Light");
+        role.addItem("Knife");
+        role.addItem("Pills");
         assertEquals(3, role.getItemList().size());
     }
     @Test
     public void testRemoveItem() {
-        role.addItems("Flash Light");
-        role.addItems("Knife");
-        role.addItems("Pills");
+        role.addItem("Flash Light");
+        role.addItem("Knife");
+        role.addItem("Pills");
         role.removeItems(role.getItemsIndex("Pills"));
         assertEquals(2, role.getItemList().size());
     }

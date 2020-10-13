@@ -35,7 +35,7 @@ public class Role {
 
     //EFFECTS: creat a new character card with no data stored.
     public Role() {
-        name = null;
+//        job.setJobNull();
         age = 0;
         gender = null;
         job = null;
@@ -65,6 +65,8 @@ public class Role {
         this.gender = gender;
     }
 
+    //MODIFIES: this
+    //EFFECTS: set job to artist and add artist's job skills and credits to character card
     public void setJobArtist() {
         this.job = new Artist();
         job.setJob();
@@ -74,6 +76,8 @@ public class Role {
         this.credit = job.getCredit();
     }
 
+    //MODIFIES: this
+    //EFFECTS: set job to nurse and add nurse's job skills and credits to character card
     public void setJobNurse() {
         this.job = new Nurse();
         job.setJob();
@@ -83,6 +87,8 @@ public class Role {
         this.credit = job.getCredit();
     }
 
+    //MODIFIES: this
+    //EFFECTS: set job to policeman and add policeman's job skills and credits to character card
     public void setJobPoliceman() {
         this.job = new Policeman();
         job.setJob();
@@ -142,18 +148,26 @@ public class Role {
         return credit;
     }
 
+    //MODIFIES: this
+    //EFFECTS: add given amount hp to character's hp
     public void addHP(int hp) {
         this.hp += hp;
     }
 
+    //MODIFIES: this
+    //EFFECTS: add given amount of sanity to character's hp
     public void addSan(int san) {
         sanity += san;
     }
 
+    //MODIFIES: this
+    //EFFECTS: reduce given amount of sanity from character's sanity
     public void removeSan(int san) {
         sanity -= san;
     }
 
+    //MODIFIES: this
+    //EFFECTS: reduce given amount of hp to character's hp
     public void removeHP(int hp) {
         this.hp -= hp;
     }
@@ -217,7 +231,9 @@ public class Role {
         return itemList;
     }
 
-
+    //MODIFIES: this
+    //EFFECTS: set up character's bonus damage based on the sum of character's strength and size
+    // (formula obeys the formula in Call of the Call of Cthulhu Quick-Start Rules 7th Edition)
     public void setBonusDamage() {
         if ((strength + size) >= 2 && (strength + size) < 85) {
             this.bonusDamage = -1;
@@ -228,10 +244,16 @@ public class Role {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: set up character's HP based on character's constitution and size
+    // (formula obeys the formula in Call of the Call of Cthulhu Quick-Start Rules 7th Edition)
     public void setHitPoints() {
         hp = (size + constitution) / 10;
     }
 
+    //MODIFIES: this
+    //EFFECTS: set up character's movement based on character's strength, dexterity, and size
+    // (formula obeys the formula in Call of the Call of Cthulhu Quick-Start Rules 7th Edition)
     public void setMovement() {
         if (strength < size && dexterity < size) {
             movement = 7;
@@ -247,12 +269,16 @@ public class Role {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: set up character's sanity based on the sum of character's power
+    // (formula obeys the formula in Call of the Call of Cthulhu Quick-Start Rules 7th Edition)
     public void setSanity() {
         sanity = this.power;
     }
 
     //MODIFIES: this
-    //EFFECTS; set free skill points depends on the education of the character.
+    //EFFECTS: set free skill points depends on the different jobs of the character.
+    //(formula obeys the formula in Call of the Call of Cthulhu Quick-Start Rules 7th Edition)
     public void setFreeSkillPoints() {
         if (job.getName().equalsIgnoreCase("Artist")) {
             freeSkillPoints = education * 2 + power * 2 + intelligence * 2;
@@ -263,11 +289,18 @@ public class Role {
         }
     }
 
+    //REQUIRES: skill name should not be null, 0 <= points <= MAX_STATES
+    //MODIFIES: this
+    //EFFECTS: add the skill with given name and skill points to the skill list
     public void addSkills(String skillName,int points) {
         skillList.add(new Skill(skillName,points));
         freeSkillPoints -= points;
     }
 
+    //REQUIRES: skill name should exist in current skill list, 0 <= points
+    //MODIFIES: this
+    //EFFECTS: add skill points to given skill. And subtract given points from free skill points
+    //return ture if the adding will not make skill point exceed the MAX_STATES, false otherwise
     public boolean addSkillsPoints(String name, int points) {
         for (Skill s: skillList) {
             if (s.getSkill().equalsIgnoreCase(name)
@@ -280,6 +313,10 @@ public class Role {
         return false;
     }
 
+    //REQUIRES: skill name should exist in current skill list, 0 <= points
+    //MODIFIES: this
+    //EFFECTS: remove skill points to given skill. And add given points from free skill points
+    //return ture if the subtracting will not make skill negative, false otherwise
     public boolean removeSkillPoints(String name, int points) {
         for (Skill s: skillList) {
             if (s.getSkill().equalsIgnoreCase(name) && points <= s.getSkillPoints()
@@ -292,30 +329,40 @@ public class Role {
         return false;
     }
 
+    //EFFECTS: return a result of rolling 3 faces dice
     public int rollD3() {
         return d3.nextInt(3) + 1;
     }
 
+    //EFFECTS: return a result of rolling 6 faces dice
     public int rollD6() {
         return d6.nextInt(6) + 1;
     }
 
+    //EFFECTS: return a result of rolling 20 faces dice
     public int rollD20() {
         return d20.nextInt(20) + 1;
     }
 
+    //EFFECTS: return a result of rolling 100 faces dice
     public int rollD100() {
         return d100.nextInt(100) + 1;
     }
 
-    public void addItems(String item) {
+    //MODIFIES: this
+    //EFFECTS: add an item to item list
+    public void addItem(String item) {
         itemList.add(item);
     }
 
+    //MODIFIES: this
+    //EFFECTS: remove an item in the give index
     public void removeItems(int index) {
         itemList.remove(index);
     }
 
+    //REQUIRES: given item exist in item list
+    //EFFECTS: return the index of the given item, -1 if no item funded
     public int getItemsIndex(String item) {
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).equalsIgnoreCase(item)) {
@@ -325,6 +372,8 @@ public class Role {
         return -1;
     }
 
+    //REQUIRES: given skill exist in skill list
+    //EFFECTS: return the index of the given skill name, -1 if no skill name funded
     public int getSkill(String skillName) {
         for (int i = 0; i < skillList.size(); i++) {
             if (skillList.get(i).getSkill().equalsIgnoreCase(skillName)) {

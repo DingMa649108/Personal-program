@@ -29,7 +29,7 @@ public class Skill {
     }
 
     public String toString() {
-        return skill + skillPoints;
+        return skill + " " + skillPoints;
     }
 
     //REQUIRES: points greater or equal to 0, point smaller than 99

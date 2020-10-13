@@ -11,6 +11,12 @@ public abstract class Job {
     //EFFECTS: set up all information for a job
     abstract void setJob();
 
+    public void setJobNull() {
+        jobName = null;
+        credit = 0;
+        skillList = new ArrayList<>();
+    }
+
     public String getName() {
         return jobName;
     }
