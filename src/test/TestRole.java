@@ -115,7 +115,7 @@ public class TestRole {
                 assertEquals(-1, role.getBonusDamage());
             } else if ((role.getStrength() + role.getSize()) >= 97 && (role.getStrength() + role.getSize()) < 139) {
                 assertEquals(0, role.getBonusDamage());
-            } else if (((role.getStrength() + role.getSize()) >= 139 && (role.getStrength() + role.getSize()) <= 180)) {
+            } else if (((role.getStrength() + role.getSize()) >= 139 && (role.getStrength() + role.getSize()) < 181)) {
                 assertEquals(1, role.getBonusDamage());
             }
         }

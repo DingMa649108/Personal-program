@@ -238,7 +238,7 @@ public class Role {
             this.bonusDamage = -1;
         } else if ((strength + size) >= 97 && (strength + size) < 139) {
             this.bonusDamage = 0;
-        } else if ((strength + size) >= 139 && (strength + size) <= 180) {
+        } else if ((strength + size) >= 139 && (strength + size) < 181) {
             this.bonusDamage = 1;
         }
     }
