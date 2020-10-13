@@ -232,7 +232,7 @@ public class Role {
 
     //MODIFIES: this
     //EFFECTS: set up character's bonus damage based on the sum of character's strength and size
-    // (formula obeys the formula in Call of the Call of Cthulhu Quick-Start Rules 7th Edition)
+    // (formula obeys the formula in Call of the Call of Cthulhu Quick-Start Rules 7th Edition).
     public void setBonusDamage() {
         if ((strength + size) >= 55 && (strength + size) < 97) {
             this.bonusDamage = -1;
