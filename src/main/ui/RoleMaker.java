@@ -65,7 +65,7 @@ public class RoleMaker {
     }
 
     public void cardMenu(Role role) {
-        System.out.println("\nPlease choose one of following");
+        System.out.println("\nPlease choose one of following\n" + "(please follow the order from 1 to 7)");
         System.out.println("1. Set name\n" + "2. Set age\n" + "3. Set gender\n" + "4. Set job\n" + "5. Set states\n"
                 + "6. Skill\n" + "7. Item\n" + "8. Previous menu\n");
         int choice = input.nextInt();

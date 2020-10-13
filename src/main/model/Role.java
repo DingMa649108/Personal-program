@@ -35,7 +35,6 @@ public class Role {
 
     //EFFECTS: creat a new character card with no data stored.
     public Role() {
-//        job.setJobNull();
         age = 0;
         gender = null;
         job = null;
@@ -319,8 +318,7 @@ public class Role {
     //return ture if the subtracting will not make skill negative, false otherwise
     public boolean removeSkillPoints(String name, int points) {
         for (Skill s: skillList) {
-            if (s.getSkill().equalsIgnoreCase(name) && points <= s.getSkillPoints()
-                    && s.getSkillPoints() >= points) {
+            if (s.getSkill().equalsIgnoreCase(name) && points <= s.getSkillPoints()) {
                 s.removeSkillPoints(points);
                 freeSkillPoints += points;
                 return true;

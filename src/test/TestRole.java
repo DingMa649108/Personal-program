@@ -274,4 +274,54 @@ public class TestRole {
         role.removeSan(5);
         assertEquals(san - 5, role.getSanity());
     }
+    @Test
+    public void testGetItemIndexNone() {
+        role.addItem("Flash Light");
+        role.addItem("Knife");
+        role.addItem("Pills");
+        assertEquals(-1, role.getItemsIndex("Bag"));
+    }
+    @Test
+    public void testGetSkillsNone() {
+        role.setStates();
+        role.setJobArtist();
+        role.setFreeSkillPoints();
+        int points = role.getFreeSkillPoints();
+        role.addSkills("Sleep",10);
+        role.addSkills("Eat",10);
+        role.addSkills("Drive",10);
+        assertEquals(-1,role.getSkill("Run"));
+    }
+    @Test
+    public void testGenerallSetterAndGetter() {
+        role.setName("Ding");
+        role.setAge(20);
+        role.setGender("male");
+        assertEquals("Ding",role.getName());
+        assertEquals(20,role.getAge());
+        assertEquals("male",role.getGender());
+    }
+    @Test
+    public void dicesInRange() {
+        for(int i = 0; i < 100; i++) {
+            assertTrue(1 <= role.rollD3() && role.rollD3() <=3);
+            assertTrue(1 <= role.rollD6() && role.rollD6() <=6);
+            assertTrue(1 <= role.rollD20() && role.rollD20() <=20);
+            assertTrue(1 <= role.rollD100() && role.rollD100() <=100);
+        }
+    }
+    @Test
+    public void dicesRandom() {
+        int count = 0;
+        Role role2 = new Role();
+        for(int i = 0; i < 100; i++) {
+            if (role.rollD3() == role2.rollD3()
+            && role.rollD6() == role2.rollD6()
+            && role.rollD20() == role2.rollD20()
+            && role.rollD100() == role2.rollD100()) {
+                count ++;
+            }
+        }
+        assertTrue(count != 100);
+    }
 }
