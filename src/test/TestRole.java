@@ -108,14 +108,14 @@ public class TestRole {
 
     @Test
     public void testSetBonusDamage() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100000; i++) {
             role.setStates();
             role.setBonusDamage();
-            if ((role.getStrength() + role.getSize()) >= 2 && (role.getStrength() + role.getSize()) < 85) {
+            if ((role.getStrength() + role.getSize()) >= 55 && (role.getStrength() + role.getSize()) < 97) {
                 assertEquals(-1, role.getBonusDamage());
-            } else if ((role.getStrength() + role.getSize()) >= 85 && (role.getStrength() + role.getSize()) < 124) {
+            } else if ((role.getStrength() + role.getSize()) >= 97 && (role.getStrength() + role.getSize()) < 139) {
                 assertEquals(0, role.getBonusDamage());
-            } else if (((role.getStrength() + role.getSize()) >= 124 && (role.getStrength() + role.getSize()) <= 180)) {
+            } else if (((role.getStrength() + role.getSize()) >= 139 && (role.getStrength() + role.getSize()) <= 180)) {
                 assertEquals(1, role.getBonusDamage());
             }
         }
