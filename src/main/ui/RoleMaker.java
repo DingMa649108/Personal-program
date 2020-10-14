@@ -147,14 +147,14 @@ public class RoleMaker {
     //EFFECTS: add a new skill with name and skill points inputted by users
     public void addSkill(Role role) {
         checkFreeSkillPointIsNotZero(role);
-        System.out.println("Free points: " + role.getFreeSkillPoints());
+        System.out.println("\nFree points: " + role.getFreeSkillPoints());
         System.out.println("\nPlease enter skill name");
         String skillName = input.nextLine();
         System.out.println("Please enter skill points for the skill");
         int points = input.nextInt();
         input.nextLine();
         role.addSkills(skillName, points);
-        System.out.println("Free points: " + role.getFreeSkillPoints());
+        System.out.println("\nFree points: " + role.getFreeSkillPoints());
     }
 
     //MODIFIES: this
@@ -162,39 +162,39 @@ public class RoleMaker {
     // Then add inputted skill points to the skill has inputted name
     public void addSkillPoint(Role role) {
         checkFreeSkillPointIsNotZero(role);
-        System.out.println("Free points: " + role.getFreeSkillPoints());
+        System.out.println("\nFree points: " + role.getFreeSkillPoints());
         System.out.println("Please enter skill name");
         String skillName = input.nextLine();
         System.out.println("Please enter skill points you want to add");
         int points = input.nextInt();
         input.nextLine();
         role.addSkills(skillName, points);
-        System.out.println("Free points: " + role.getFreeSkillPoints());
+        System.out.println("\nFree points: " + role.getFreeSkillPoints());
     }
 
     //MODIFIES: this
     //EFFECTS: ask users to input skill name and skill points they want to remove.
     // Then remove inputted skill points from the skill has inputted name
     public void removeSkillPoint(Role role) {
-        System.out.println("Free points: " + role.getFreeSkillPoints());
+        System.out.println("\nFree points: " + role.getFreeSkillPoints());
         System.out.println("Please enter skill name");
         String skillName = input.nextLine();
         System.out.println("Please enter skill points you want to remove");
         int points = input.nextInt();
         input.nextLine();
         role.removeSkillPoints(skillName, points);
-        System.out.println("Free points: " + role.getFreeSkillPoints());
+        System.out.println("\nFree points: " + role.getFreeSkillPoints());
     }
 
     //MODIFIES: this
     //EFFECTS: ask users to input skill name they want to remove.
     // Then remove skill with inputted name from the skill list.
     public void removeSkill(Role role) {
-        System.out.println("Free points: " + role.getFreeSkillPoints());
+        System.out.println("\nFree points: " + role.getFreeSkillPoints());
         System.out.println("Please enter skill name you want to remove");
         String skillName = input.nextLine();
         role.removeSkill(skillName);
-        System.out.println("Free points: " + role.getFreeSkillPoints());
+        System.out.println("\nFree points: " + role.getFreeSkillPoints());
     }
 
     //MODIFIES: this
