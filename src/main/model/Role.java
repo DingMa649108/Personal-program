@@ -296,7 +296,7 @@ public class Role {
         }
     }
 
-    //REQUIRES: skill name should not be null, 0 <= points <= MAX_STATES
+    //REQUIRES: skill name should not be null, 0 <= points <= MAX_STATES, passed skill should not exist in skill list
     //MODIFIES: this
     //EFFECTS: add the skill with given name and skill points to the skill list
     public void addSkills(String skillName, int points) {
@@ -370,6 +370,7 @@ public class Role {
         return d100.nextInt(100) + 1;
     }
 
+    //REQUIRES: passed item should not exist in the item list
     //MODIFIES: this
     //EFFECTS: add an item to item list
     public void addItem(String item) {

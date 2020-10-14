@@ -30,7 +30,7 @@ public class RoleMaker {
     public void mainMenu() {
         System.out.println("\nPlease choose one of following");
         System.out.println("1. Make role card\n"
-                + "2. Actions\n"
+                + "2. Actions(Please make role first before choosing action)\n"
                 + "3. roll\n"
                 + "4. Display role card\n"
                 + "5. Quit");
@@ -88,7 +88,7 @@ public class RoleMaker {
 
     //MODIFIES: this
     //EFFECTS: display the job menu and allow users to choose the job for the role
-    //(1.set job to Artist
+    // 1.set job to Artist
     // 2.set job to Nurse
     // 3.set Policeman
     // 4.back to previous menu)
@@ -114,7 +114,7 @@ public class RoleMaker {
 
     //MODIFIES: this
     //EFFECTS: display the skill menu and allow users to creat and manage their skills
-    //(1.add a new skill with skill points to skill list
+    // 1.add a new skill with skill points to skill list
     // 2.add skill points to a existing skill
     // 3.remove skill points from skill list
     // 4.remove a skill from skill list entirely
@@ -176,7 +176,6 @@ public class RoleMaker {
     //EFFECTS: ask users to input skill name and skill points they want to remove.
     // Then remove inputted skill points from the skill has inputted name
     public void removeSkillPoint(Role role) {
-        checkFreeSkillPointIsNotZero(role);
         System.out.println("Free points: " + role.getFreeSkillPoints());
         System.out.println("Please enter skill name");
         String skillName = input.nextLine();
@@ -191,7 +190,6 @@ public class RoleMaker {
     //EFFECTS: ask users to input skill name they want to remove.
     // Then remove skill with inputted name from the skill list.
     public void removeSkill(Role role) {
-        checkFreeSkillPointIsNotZero(role);
         System.out.println("Free points: " + role.getFreeSkillPoints());
         System.out.println("Please enter skill name you want to remove");
         String skillName = input.nextLine();
@@ -243,26 +241,47 @@ public class RoleMaker {
         role.removeItems(role.getItemsIndex(item));
     }
 
-    //EFFECTS: ask users to input the faces og dice they want to use.
+    //EFFECTS: ask users to input the faces of dice they want to use
+    // and how many time they want to roll.
     // Than display the result of rolling
     public void roll(Role role) {
-        System.out.println("\nEnter faces of dice(3,6,20,100)");
+        System.out.println("\nPlease enter faces of dice(3,6,20,100)");
         int choiceDice = input.nextInt();
         input.nextLine();
+        System.out.println("\nPlease enter times you want to roll");
+        int choiceTimes = input.nextInt();
+        input.nextLine();
+        rollHelper(choiceDice,choiceTimes);
+        mainMenu();
+    }
+
+    //EFFECT: roll the chosen dice for the chosen time.
+    // Then, display the result.
+    public void rollHelper(int choiceDice, int choiceTimes) {
+        int total = 0;
         if (choiceDice == 3) {
-            System.out.println(role.rollD3());
+            for (int i = 0; i < choiceTimes; i++) {
+                total += role.rollD3();
+            }
         } else if (choiceDice == 6) {
-            System.out.println(role.rollD6());
+            for (int i = 0; i < choiceTimes; i++) {
+                total += role.rollD6();
+            }
         } else if (choiceDice == 20) {
-            System.out.println(role.rollD20());
+            for (int i = 0; i < choiceTimes; i++) {
+                total += role.rollD20();
+            }
         } else if (choiceDice == 100) {
-            System.out.println(role.rollD100());
+            for (int i = 0; i < choiceTimes; i++) {
+                total += role.rollD100();
+            }
         }
+        System.out.println(choiceTimes + " D" + choiceDice + ": " + total);
     }
 
     //MODIFIES: this
     //EFFECTS: display the skill menu and allow users to creat and manage their skills
-    //(1.add hit points for user's role
+    // 1.add hit points for user's role
     // 2.reduce hit points for user's role
     // 3.add sanity for user's role
     // 4.reduce sanity for user's role
@@ -274,20 +293,21 @@ public class RoleMaker {
         int choice = input.nextInt();
         input.nextLine();
         if (choice == 1) {
+            System.out.println("Please enter number of HP you want to add");
             role.addHP(input.nextInt());
-            input.nextLine();
         } else if (choice == 2) {
+            System.out.println("Please enter number of HP you want to reduce");
             role.removeHP(input.nextInt());
-            input.nextLine();
         } else if (choice == 3) {
+            System.out.println("Please enter number of SAN you want to add");
             role.addSan(input.nextInt());
-            input.nextLine();
         } else if (choice == 4) {
+            System.out.println("Please enter number of SAN you want to reduce");
             role.removeSan(input.nextInt());
-            input.nextLine();
         } else if (choice == 5) {
             mainMenu();
         }
+        input.nextLine();
         actionMenu(role);
     }
 
@@ -312,7 +332,7 @@ public class RoleMaker {
     }
 
     //MODIFIES: this
-    //EFFECTS: ask user to input role's age, and set role's name to the inputted age
+    //EFFECTS: ask user to input role's age, and set role's age to the inputted age
     public void setAge(Role role) {
         System.out.println("\nPlease enter age for the role");
         role.setAge(input.nextInt());
@@ -320,22 +340,22 @@ public class RoleMaker {
     }
 
     //MODIFIES: this
-    //EFFECTS: ask user to input role's gender, and set role's name to the inputted gender
+    //EFFECTS: ask user to input role's gender, and set role's gender to the inputted gender
     public void setGender(Role role) {
         System.out.println("\nPlease enter gender for the role");
         role.setGender(input.nextLine());
     }
 
     //EFFECTS: check if the free skill point is zero.
-    // Display guidance information and return to main menu if free points is zero, nothing happens otherwise
+    // Display guidance information and return to skill menu if free points is zero, nothing happens otherwise
     public void checkFreeSkillPointIsNotZero(Role role) {
         if (role.getFreeSkillPoints() == 0) {
             System.out.println("If free points is 0 before you edit skill, please go set up states and job first");
-            mainMenu();
+            skillMenu(role);
         }
     }
 
-    //EFFECTS: display the role card users created
+    //EFFECTS: display the information on role card user created
     public void displayRoleCard(Role role) {
         System.out.println("Role Card");
         System.out.println("Name: " + role.getName());
