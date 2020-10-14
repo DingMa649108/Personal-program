@@ -93,7 +93,8 @@ public class RoleMaker {
     // 3.set Policeman
     // 4.back to previous menu)
     public void jobMenu(Role role) {
-        System.out.println("\nPlease choose one of following jobs" + "\n(Please type 4 after finishing choosing)");
+        System.out.println("\nPlease choose one of following jobs"
+                + "\n(Please set states every time after choosing job)" + "\n(Please type 4 after finishing choosing)");
         System.out.println("1. Artist\n"
                 + "2. Nurse\n"
                 + "3. Policeman\n"
@@ -107,6 +108,7 @@ public class RoleMaker {
         } else if (choice == 3) {
             role.setJobPoliceman();
         } else if (choice == 4) {
+            role.addJobSkills();
             cardMenu(role);
         }
         jobMenu(role);
@@ -146,13 +148,21 @@ public class RoleMaker {
     //MODIFIES: this
     //EFFECTS: add a new skill with name and skill points inputted by users
     public void addSkill(Role role) {
-        checkFreeSkillPointIsNotZero(role);
         System.out.println("\nFree points: " + role.getFreeSkillPoints());
+        checkFreeSkillPointIsNotZero(role);
         System.out.println("\nPlease enter skill name");
         String skillName = input.nextLine();
         System.out.println("Please enter skill points for the skill");
         int points = input.nextInt();
         input.nextLine();
+        if (points > role.getFreeSkillPoints()) {
+            System.out.println("Sorry you dont have enough free skill points");
+            skillMenu(role);
+        }
+        if (points > 90) {
+            System.out.println("Sorry the maximum skill points for one skill is 90");
+            skillMenu(role);
+        }
         role.addSkills(skillName, points);
         System.out.println("\nFree points: " + role.getFreeSkillPoints());
     }
@@ -161,14 +171,26 @@ public class RoleMaker {
     //EFFECTS: ask users to input skill name and skill points they want to add.
     // Then add inputted skill points to the skill has inputted name
     public void addSkillPoint(Role role) {
-        checkFreeSkillPointIsNotZero(role);
         System.out.println("\nFree points: " + role.getFreeSkillPoints());
+        checkFreeSkillPointIsNotZero(role);
         System.out.println("Please enter skill name");
         String skillName = input.nextLine();
+        if (role.getSkillIndex(skillName) == -1) {
+            System.out.println("Sorry the skill is not in the list");
+            skillMenu(role);
+        }
         System.out.println("Please enter skill points you want to add");
         int points = input.nextInt();
         input.nextLine();
-        role.addSkills(skillName, points);
+        if (points > role.getFreeSkillPoints()) {
+            System.out.println("Sorry, you dont have enough free skill points");
+            skillMenu(role);
+        }
+        if (points + role.getSkillList().get(role.getSkillIndex(skillName)).getSkillPoints() > 90) {
+            System.out.println("Sorry, the maximum skill points for one skill is 90");
+            skillMenu(role);
+        }
+        role.addSkillsPoints(skillName, points);
         System.out.println("\nFree points: " + role.getFreeSkillPoints());
     }
 
@@ -179,11 +201,21 @@ public class RoleMaker {
         System.out.println("\nFree points: " + role.getFreeSkillPoints());
         System.out.println("Please enter skill name");
         String skillName = input.nextLine();
-        System.out.println("Please enter skill points you want to remove");
-        int points = input.nextInt();
-        input.nextLine();
-        role.removeSkillPoints(skillName, points);
-        System.out.println("\nFree points: " + role.getFreeSkillPoints());
+        if (role.getSkillIndex(skillName) == -1) {
+            System.out.println("Sorry the skill is not in the list");
+            skillMenu(role);
+        } else {
+            System.out.println("Please enter skill points you want to remove");
+            int points = input.nextInt();
+            input.nextLine();
+            if (points > role.getSkillList().get(role.getSkillIndex(skillName)).getSkillPoints()) {
+                System.out.println("Sorry, you can't reduce skill points to negative value");
+                skillMenu(role);
+            } else {
+                role.removeSkillPoints(skillName, points);
+                System.out.println("\nFree points: " + role.getFreeSkillPoints());
+            }
+        }
     }
 
     //MODIFIES: this
@@ -193,8 +225,13 @@ public class RoleMaker {
         System.out.println("\nFree points: " + role.getFreeSkillPoints());
         System.out.println("Please enter skill name you want to remove");
         String skillName = input.nextLine();
-        role.removeSkill(skillName);
-        System.out.println("\nFree points: " + role.getFreeSkillPoints());
+        if (role.getSkillIndex(skillName) == -1) {
+            System.out.println("Sorry, the skill is not in the list");
+            skillMenu(role);
+        } else {
+            role.removeSkill(skillName);
+            System.out.println("\nFree points: " + role.getFreeSkillPoints());
+        }
     }
 
     //MODIFIES: this
@@ -238,7 +275,12 @@ public class RoleMaker {
     public void removeItem(Role role) {
         System.out.println("Please enter item name you want to remove");
         String item = input.nextLine();
-        role.removeItems(role.getItemsIndex(item));
+        if (role.getItemsIndex(item) == -1) {
+            System.out.println("Sorry the item you inputed is not in the list");
+            itemMenu(role);
+        } else {
+            role.removeItems(role.getItemsIndex(item));
+        }
     }
 
     //EFFECTS: ask users to input the faces of dice they want to use
@@ -367,9 +409,7 @@ public class RoleMaker {
         System.out.println("Skills: ");
         System.out.print(role.getSkillList().toString());
         System.out.println("\nItems: ");
-        for (String item : role.getItemList()) {
-            System.out.print(item + ", ");
-        }
+        System.out.print(role.getItemList().toString());
     }
 
     //EFFECTS: display the states of user's role.

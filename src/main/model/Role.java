@@ -67,36 +67,35 @@ public class Role {
     }
 
     //MODIFIES: this
-    //EFFECTS: set job to artist and add artist's job skills and credits to character card
+    //EFFECTS: set job to artist and set credits to character card
     public void setJobArtist() {
         this.job = new Artist();
         job.setJob();
-        for (int i = 0; i < job.skillList.size(); i++) {
-            skillList.add(i, job.skillList.get(i));
-        }
         this.credit = job.getCredit();
     }
 
     //MODIFIES: this
-    //EFFECTS: set job to nurse and add nurse's job skills and credits to character card
+    //EFFECTS: set job to nurse and st credits to character card
     public void setJobNurse() {
         this.job = new Nurse();
         job.setJob();
-        for (int i = 0; i < job.skillList.size(); i++) {
-            skillList.add(i, job.skillList.get(i));
-        }
         this.credit = job.getCredit();
     }
 
     //MODIFIES: this
-    //EFFECTS: set job to policeman and add policeman's job skills and credits to character card
+    //EFFECTS: set job to policeman and set credits to character card
     public void setJobPoliceman() {
         this.job = new Policeman();
         job.setJob();
+        this.credit = job.getCredit();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: add job skills to the skill list
+    public void addJobSkills() {
         for (int i = 0; i < job.skillList.size(); i++) {
             skillList.add(i, job.skillList.get(i));
         }
-        this.credit = job.getCredit();
     }
 
     //EFFECTS: returns the half of the given value
@@ -311,7 +310,7 @@ public class Role {
     public boolean addSkillsPoints(String name, int points) {
         for (Skill s : skillList) {
             if (s.getSkill().equalsIgnoreCase(name)
-                    && (points + s.getSkillPoints()) < MAX_STATES) {
+                    && points + s.getSkillPoints() <= MAX_STATES) {
                 s.addSkillPoints(points);
                 freeSkillPoints -= points;
                 return true;
@@ -342,8 +341,8 @@ public class Role {
     public boolean removeSkill(String skillName) {
         for (int i = 0; i < skillList.size(); i++) {
             if (skillList.get(i).getSkill().equalsIgnoreCase(skillName)) {
-                skillList.remove(i);
                 freeSkillPoints += skillList.get(i).getSkillPoints();
+                skillList.remove(i);
                 return true;
             }
         }
@@ -396,7 +395,7 @@ public class Role {
 
     //REQUIRES: given skill exist in skill list
     //EFFECTS: return the index of the given skill name, -1 if no skill name funded
-    public int getSkill(String skillName) {
+    public int getSkillIndex(String skillName) {
         for (int i = 0; i < skillList.size(); i++) {
             if (skillList.get(i).getSkill().equalsIgnoreCase(skillName)) {
                 return i;

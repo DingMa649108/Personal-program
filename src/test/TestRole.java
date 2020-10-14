@@ -53,6 +53,7 @@ public class TestRole {
     @Test
     public void testSetJobArtist() {
         role.setJobArtist();
+        role.addJobSkills();
         assertEquals(7, role.getSkillList().size());
         assertEquals("Artist", role.getJob().getName());
         assertEquals(30, role.getCredit());
@@ -61,6 +62,7 @@ public class TestRole {
     @Test
     public void testSetJobNurse() {
         role.setJobNurse();
+        role.addJobSkills();
         assertEquals(8, role.getSkillList().size());
         assertEquals("Nurse", role.getJob().getName());
         assertEquals(35, role.getCredit());
@@ -69,6 +71,7 @@ public class TestRole {
     @Test
     public void testSetJobPoliceman() {
         role.setJobPoliceman();
+        role.addJobSkills();
         assertEquals(9, role.getSkillList().size());
         assertEquals("Policeman", role.getJob().getName());
         assertEquals(40, role.getCredit());
@@ -176,6 +179,7 @@ public class TestRole {
     public void testSetJobSkillPointsArtist() {
         for (int i = 0; i < 20; i++) {
             role.setJobArtist();
+            role.addJobSkills();
             role.setStates();
             role.setFreeSkillPoints();
             assertEquals(role.getEducation() * 2 + role.getPower() * 2 + role.getIntelligence() * 2,
@@ -187,6 +191,7 @@ public class TestRole {
     public void testSetJobSkillPointsNurse() {
         for (int i = 0; i < 20; i++) {
             role.setJobNurse();
+            role.addJobSkills();
             role.setStates();
             role.setFreeSkillPoints();
             assertEquals(role.getEducation() * 4 + role.getIntelligence() * 2,
@@ -198,6 +203,7 @@ public class TestRole {
     public void testSetJobSkillPointsPoliceman() {
         for (int i = 0; i < 20; i++) {
             role.setJobPoliceman();
+            role.addJobSkills();
             role.setStates();
             role.setFreeSkillPoints();
             assertEquals(role.getEducation() * 2 + role.getStrength() * 2 + role.getIntelligence() * 2,
@@ -298,6 +304,7 @@ public class TestRole {
     public void testAddSkills() {
         role.setStates();
         role.setJobArtist();
+        role.addJobSkills();
         role.setFreeSkillPoints();
         int points = role.getFreeSkillPoints();
         role.addSkills("Sleep", 10);
@@ -311,6 +318,7 @@ public class TestRole {
     public void testRemoveSkillsInList() {
         role.setStates();
         role.setJobArtist();
+        role.addJobSkills();
         role.setFreeSkillPoints();
         int points = role.getFreeSkillPoints();
         role.addSkills("Sleep", 10);
@@ -327,6 +335,7 @@ public class TestRole {
     public void testRemoveSkillsNotInList() {
         role.setStates();
         role.setJobArtist();
+        role.addJobSkills();
         role.setFreeSkillPoints();
         int points = role.getFreeSkillPoints();
         role.addSkills("Sleep", 10);
@@ -343,6 +352,7 @@ public class TestRole {
     public void testAddSkillPoints() {
         role.setStates();
         role.setJobArtist();
+        role.addJobSkills();
         role.setFreeSkillPoints();
         int points = role.getFreeSkillPoints();
         role.addSkills("Sleep", 10);
@@ -352,7 +362,7 @@ public class TestRole {
         assertEquals(points - 30, role.getFreeSkillPoints());
         assertTrue(role.addSkillsPoints("Sleep", 10));
         assertFalse(role.addSkillsPoints("Eat", 100));
-        assertEquals(20, role.getSkillList().get(role.getSkill("Sleep")).getSkillPoints());
+        assertEquals(20, role.getSkillList().get(role.getSkillIndex("Sleep")).getSkillPoints());
         assertEquals(points - 40, role.getFreeSkillPoints());
     }
 
@@ -360,6 +370,7 @@ public class TestRole {
     public void testRemoveSkillPoints() {
         role.setStates();
         role.setJobArtist();
+        role.addJobSkills();
         role.setFreeSkillPoints();
         int points = role.getFreeSkillPoints();
         role.addSkills("Sleep", 10);
@@ -369,7 +380,7 @@ public class TestRole {
         assertEquals(points - 30, role.getFreeSkillPoints());
         assertTrue(role.removeSkillPoints("Sleep", 5));
         assertFalse(role.removeSkillPoints("Eat", points));
-        assertEquals(5, role.getSkillList().get(role.getSkill("Sleep")).getSkillPoints());
+        assertEquals(5, role.getSkillList().get(role.getSkillIndex("Sleep")).getSkillPoints());
         assertEquals(points - 25, role.getFreeSkillPoints());
     }
 
@@ -438,12 +449,13 @@ public class TestRole {
     public void testGetSkillsNone() {
         role.setStates();
         role.setJobArtist();
+        role.addJobSkills();
         role.setFreeSkillPoints();
         int points = role.getFreeSkillPoints();
         role.addSkills("Sleep", 10);
         role.addSkills("Eat", 10);
         role.addSkills("Drive", 10);
-        assertEquals(-1, role.getSkill("Run"));
+        assertEquals(-1, role.getSkillIndex("Run"));
     }
 
     @Test
