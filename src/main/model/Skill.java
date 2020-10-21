@@ -1,6 +1,10 @@
 package model;
 
-public class Skill {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Skill implements Writable {
+
     private String skill;       // Skill's name
     private int skillPoints;    // A measure of how professional the skill is
 
@@ -45,4 +49,13 @@ public class Skill {
     public void removeSkillPoints(int points) {
         this.skillPoints -= points;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Skill name", skill);
+        json.put("Skill points", skillPoints);
+        return json;
+    }
+
 }

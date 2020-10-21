@@ -1,3 +1,5 @@
+package model;
+
 import model.Job;
 import org.junit.jupiter.api.Test;
 

@@ -27,5 +27,10 @@ public class Job {
         return skillList;
     }
 
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
+    }
+
+
 
 }

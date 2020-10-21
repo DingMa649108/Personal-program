@@ -27,3 +27,5 @@ A *user stories* list:
 - As a user, I want to be able to remove items to my character's item list.
 - As a user, I want to be able to assign basic information(name, age, and gender) for my character.
 - As a user, I want to be able to choose the job I want from given jobs.
+- As a user, I want to be able to save my role card to file.
+- As a user, I want to be able to load my role card from file.

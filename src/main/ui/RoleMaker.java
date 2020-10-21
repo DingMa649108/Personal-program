@@ -1,16 +1,27 @@
 package ui;
 
+import model.Item;
 import model.Role;
 import model.Skill;
+import persistence.JsonWriter;
+import persistence.JsonReader;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class RoleMaker {
+    private static final String JSON_STORE = "./data/Role.json";
     private final Scanner input = new Scanner(System.in);
     private Role role;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
 
     //EFFECTS: run the role maker application
     public RoleMaker() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runRoleMaker();
     }
 
@@ -28,12 +39,11 @@ public class RoleMaker {
     // 4.display the role card
     // 5.quit program
     public void mainMenu() {
-        System.out.println("\nPlease choose one of following");
-        System.out.println("1. Make role card\n"
+        System.out.println("\nPlease choose one of following\n" + "1. Make role card\n"
                 + "2. Actions(Please make role first before choosing action)\n"
-                + "3. roll\n"
-                + "4. Display role card\n"
-                + "5. Quit");
+                + "3. roll\n" + "4. Display role card\n"
+                + "5. Save role card\n" + "6. Load role card\n"
+                + "7. Quit\n");
         int choice = input.nextInt();
         input.nextLine();
         if (choice == 1) {
@@ -45,6 +55,10 @@ public class RoleMaker {
         } else if (choice == 4) {
             displayRoleCard(role);
         } else if (choice == 5) {
+            saveRoleCard();
+        } else if (choice == 6) {
+            loadRoleCard();
+        } else if (choice == 7) {
             quit();
         }
         mainMenu();
@@ -241,8 +255,8 @@ public class RoleMaker {
     // 3.back to previous menu
     public void itemMenu(Role role) {
         System.out.println("Items: ");
-        for (String s : role.getItemList()) {
-            System.out.print(s);
+        for (Item s : role.getItemList()) {
+            System.out.print(s.getItemName());
         }
         System.out.println("\nPlease choose one of following");
         System.out.println("1. Add new item\n"
@@ -276,7 +290,7 @@ public class RoleMaker {
         System.out.println("Please enter item name you want to remove");
         String item = input.nextLine();
         if (role.getItemsIndex(item) == -1) {
-            System.out.println("Sorry the item you inputed is not in the list");
+            System.out.println("Sorry the item you inputted is not in the list");
             itemMenu(role);
         } else {
             role.removeItems(role.getItemsIndex(item));
@@ -409,7 +423,11 @@ public class RoleMaker {
         System.out.println("Skills: ");
         System.out.print(role.getSkillList().toString());
         System.out.println("\nItems: ");
-        System.out.print(role.getItemList().toString());
+        System.out.print("[");
+        for (Item item: role.getItemList()) {
+            System.out.print(item.getItemName() + ", ");
+        }
+        System.out.print("]");
     }
 
     //EFFECTS: display the states of user's role.
@@ -435,6 +453,29 @@ public class RoleMaker {
                 + "(" + role.halfValue(role.getLuck()) + " " + role.fifthValue(role.getLuck()) + ")"
                 + "\tDMG: " + role.getBonusDamage());
         System.out.println("MOV: " + role.getMovement() + "\tCredit: " + role.getCredit());
+    }
+
+    // EFFECTS: saves the role card to file
+    private void saveRoleCard() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(role);
+            jsonWriter.close();
+            System.out.println("Saved role card" + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadRoleCard() {
+        try {
+            role = jsonReader.read();
+            System.out.println("Loaded role card" + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
     //EFFECTS: quit the application

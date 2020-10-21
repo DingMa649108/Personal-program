@@ -1,0 +1,55 @@
+{
+    "APP": 55,
+    "SAN": 50,
+    "CON": 60,
+    "gender": "male",
+    "SIZ": 80,
+    "hp": 14,
+    "free skill points": 360,
+    "bonus damage": 1,
+    "INT": 70,
+    "STR": 70,
+    "skills": [
+        {
+            "Skill name": "Art",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Bargain",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "History",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Library Use",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Persuade",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Photography",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Psychology",
+            "Skill points": 0
+        }
+    ],
+    "MOV": 9,
+    "DEX": 45,
+    "EDU": 60,
+    "name": "asd",
+    "POW": 50,
+    "LUC": 60,
+    "job": "Artist",
+    "credit": 30,
+    "items": [
+        {"Item name": "dfg"},
+        {"Item name": "rty"}
+    ],
+    "age": 22
+}

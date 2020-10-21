@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 // Represent a character having name, age, gender, states, skills, and items.
-public class Role {
+public class Role implements Writable {
     private String name;            // Character's name
     private int age;                // Character's age
     private String gender;          // Character's gender
@@ -25,7 +29,7 @@ public class Role {
     private int movement;           // A measure of how far character can move in one term
     private int sanity;             // Character’s ability to remain stoic in the face of horrors
     private int credit;             // An indicator of character's wealth and class.
-    private final List<String> itemList;  // A list of items character has
+    private final List<Item> itemList;  // A list of items character has
     private final List<Skill> skillList;  // A list of skills character has
     static final Random d3 = new Random();      // A dice with 3 faces
     static final Random d6 = new Random();      // A dice with 6 faces
@@ -48,6 +52,11 @@ public class Role {
         education = 0;
         luck = 0;
         freeSkillPoints = 0;
+        hp = 0;
+        sanity = 0;
+        credit = 0;
+        movement = 0;
+        bonusDamage = 0;
         skillList = new ArrayList<>();
         itemList = new ArrayList<>();
         job = new Job();
@@ -227,7 +236,7 @@ public class Role {
         return skillList;
     }
 
-    public List<String> getItemList() {
+    public List<Item> getItemList() {
         return itemList;
     }
 
@@ -244,6 +253,10 @@ public class Role {
         } else {
             this.bonusDamage = 0;
         }
+    }
+
+    public void setBonusDamage(int bonusDamage) {
+        this.bonusDamage = bonusDamage;
     }
 
     //MODIFIES: this
@@ -273,11 +286,19 @@ public class Role {
         }
     }
 
+    public void setMovement(int movement) {
+        this.movement = movement;
+    }
+
     //MODIFIES: this
     //EFFECTS: set up character's sanity based on the sum of character's power
     // (formula obeys the formula in Call of the Call of Cthulhu Quick-Start Rules 7th Edition)
     public void setSanity() {
         sanity = this.power;
+    }
+
+    public void setSanity(int sanity) {
+        this.sanity = sanity;
     }
 
     //MODIFIES: this
@@ -295,12 +316,22 @@ public class Role {
         }
     }
 
+    public void setFreeSkillPoints(int freeSkillPoints) {
+        this.freeSkillPoints = freeSkillPoints;
+    }
+
     //REQUIRES: skill name should not be null, 0 <= points <= MAX_STATES, passed skill should not exist in skill list
     //MODIFIES: this
     //EFFECTS: add the skill with given name and skill points to the skill list
     public void addSkills(String skillName, int points) {
         skillList.add(new Skill(skillName, points));
         freeSkillPoints -= points;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: add the given skill object to the skill list
+    public void addSkills(Skill skill) {
+        skillList.add(skill);
     }
 
     //REQUIRES: skill name should exist in current skill list, 0 <= points
@@ -373,7 +404,7 @@ public class Role {
     //MODIFIES: this
     //EFFECTS: add an item to item list
     public void addItem(String item) {
-        itemList.add(item);
+        itemList.add(new Item(item));
     }
 
     //MODIFIES: this
@@ -386,7 +417,7 @@ public class Role {
     //EFFECTS: return the index of the given item, -1 if no item funded
     public int getItemsIndex(String item) {
         for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).equalsIgnoreCase(item)) {
+            if (itemList.get(i).getItemName().equalsIgnoreCase(item)) {
                 return i;
             }
         }
@@ -416,4 +447,95 @@ public class Role {
         dexterity = dex;
     }
 
+    public void setAppearance(int appearance) {
+        this.appearance = appearance;
+    }
+
+    public void setConstitution(int constitution) {
+        this.constitution = constitution;
+    }
+
+    public void setEducation(int education) {
+        this.education = education;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+
+    public void setCredit(int credit) {
+        this.credit = credit;
+    }
+
+
+
+
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setLuck(int luck) {
+        this.luck = luck;
+    }
+
+
+
+    public void setJobName(String jobName) {
+        job.setJobName(jobName);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("age", age);
+        json.put("gender", gender);
+        json.put("job", getJob().getName());
+        json.put("STR", strength);
+        json.put("CON", constitution);
+        json.put("POW", power);
+        json.put("DEX", dexterity);
+        json.put("APP", appearance);
+        json.put("SIZ", size);
+        json.put("INT", intelligence);
+        json.put("EDU", education);
+        json.put("LUC", luck);
+        json.put("free skill points", freeSkillPoints);
+        json.put("bonus damage", bonusDamage);
+        json.put("hp", hp);
+        json.put("MOV", movement);
+        json.put("SAN", sanity);
+        json.put("credit", credit);
+        json.put("skills", skillsToJson());
+        json.put("items", itemsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns skills in this role card as a JSON array
+    private JSONArray skillsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Skill skill : skillList) {
+            jsonArray.put(skill.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    // EFFECTS: returns items in this role card as a JSON array
+    private JSONArray itemsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item item : itemList) {
+            jsonArray.put(item.toJson());
+        }
+
+        return jsonArray;
+    }
 }
