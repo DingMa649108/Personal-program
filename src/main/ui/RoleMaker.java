@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 // some parts of this class is inspired by JsonSerializationDemo
+// link for JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class RoleMaker {
     private static final String JSON_STORE = "./data/Role.json";
     private final Scanner input = new Scanner(System.in);

@@ -12,6 +12,7 @@ import model.Skill;
 import org.json.*;
 
 // some parts of this class is inspired by JsonSerializationDemo
+// link for JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 // Represents a reader that reads role card from JSON data stored in file
 public class JsonReader {
     private final String source;

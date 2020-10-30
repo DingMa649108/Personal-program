@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Random;
 
 // some parts of this class is inspired by JsonSerializationDemo
+// link for JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
 // Represent a character having name, age, gender, states, skills, and items.
 public class Role implements Writable {
     private String name;            // Character's name

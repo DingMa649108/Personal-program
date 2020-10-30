@@ -1,55 +1,59 @@
 {
-    "APP": 40,
-    "SAN": 55,
-    "CON": 40,
+    "APP": 60,
+    "SAN": 70,
+    "CON": 50,
     "gender": "male",
-    "SIZ": 60,
-    "hp": 10,
-    "free skill points": 390,
+    "SIZ": 65,
+    "hp": 11,
+    "free skill points": 420,
     "bonus damage": 0,
-    "INT": 55,
-    "STR": 70,
+    "INT": 90,
+    "STR": 55,
     "skills": [
         {
-            "Skill name": "Biology",
+            "Skill name": "Drive Automobile",
             "Skill points": 0
         },
         {
-            "Skill name": "Psychology",
+            "Skill name": "Firearms",
             "Skill points": 0
         },
         {
-            "Skill name": "First Aid",
+            "Skill name": "Law",
             "Skill points": 0
         },
         {
-            "Skill name": "Computer Use",
+            "Skill name": "Fist/Punch",
             "Skill points": 0
         },
         {
-            "Skill name": "Medicine",
+            "Skill name": "Grapple",
             "Skill points": 0
         },
         {
-            "Skill name": "Pharmacy",
+            "Skill name": "Kick",
             "Skill points": 0
         },
         {
-            "Skill name": "Reputation",
+            "Skill name": "Track",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Persuade",
             "Skill points": 0
         }
     ],
-    "MOV": 7,
-    "DEX": 65,
-    "EDU": 70,
-    "name": "qwe",
-    "POW": 55,
-    "LUC": 55,
-    "job": "Nurse",
-    "credit": 35,
+    "MOV": 8,
+    "DEX": 70,
+    "EDU": 65,
+    "name": "d",
+    "POW": 70,
+    "LUC": 50,
+    "job": "Policeman",
+    "credit": 40,
     "items": [
-        {"Item name": "bag"},
-        {"Item name": "flash light"}
+        {"Item name": "flah light"},
+        {"Item name": "bag"}
     ],
-    "age": 23
+    "age": 22
 }
