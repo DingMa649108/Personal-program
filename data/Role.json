@@ -1,55 +1,55 @@
 {
-    "APP": 55,
-    "SAN": 50,
-    "CON": 60,
+    "APP": 40,
+    "SAN": 55,
+    "CON": 40,
     "gender": "male",
-    "SIZ": 80,
-    "hp": 14,
-    "free skill points": 360,
-    "bonus damage": 1,
-    "INT": 70,
+    "SIZ": 60,
+    "hp": 10,
+    "free skill points": 390,
+    "bonus damage": 0,
+    "INT": 55,
     "STR": 70,
     "skills": [
         {
-            "Skill name": "Art",
-            "Skill points": 0
-        },
-        {
-            "Skill name": "Bargain",
-            "Skill points": 0
-        },
-        {
-            "Skill name": "History",
-            "Skill points": 0
-        },
-        {
-            "Skill name": "Library Use",
-            "Skill points": 0
-        },
-        {
-            "Skill name": "Persuade",
-            "Skill points": 0
-        },
-        {
-            "Skill name": "Photography",
+            "Skill name": "Biology",
             "Skill points": 0
         },
         {
             "Skill name": "Psychology",
             "Skill points": 0
+        },
+        {
+            "Skill name": "First Aid",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Computer Use",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Medicine",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Pharmacy",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Reputation",
+            "Skill points": 0
         }
     ],
-    "MOV": 9,
-    "DEX": 45,
-    "EDU": 60,
-    "name": "asd",
-    "POW": 50,
-    "LUC": 60,
-    "job": "Artist",
-    "credit": 30,
+    "MOV": 7,
+    "DEX": 65,
+    "EDU": 70,
+    "name": "qwe",
+    "POW": 55,
+    "LUC": 55,
+    "job": "Nurse",
+    "credit": 35,
     "items": [
-        {"Item name": "dfg"},
-        {"Item name": "rty"}
+        {"Item name": "bag"},
+        {"Item name": "flash light"}
     ],
-    "age": 22
+    "age": 23
 }

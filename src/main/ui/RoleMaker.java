@@ -257,7 +257,7 @@ public class RoleMaker {
     public void itemMenu(Role role) {
         System.out.println("Items: ");
         for (Item s : role.getItemList()) {
-            System.out.print(s.getItemName());
+            System.out.print(s.getItemName() + ", ");
         }
         System.out.println("\nPlease choose one of following");
         System.out.println("1. Add new item\n"
