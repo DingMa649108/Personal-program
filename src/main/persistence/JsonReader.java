@@ -1,6 +1,5 @@
 package persistence;
 
-import model.Job;
 import model.Role;
 
 import java.io.IOException;
@@ -12,7 +11,8 @@ import java.util.stream.Stream;
 import model.Skill;
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// some parts of this class is inspired by JsonSerializationDemo
+// Represents a reader that reads role card from JSON data stored in file
 public class JsonReader {
     private final String source;
     private String name;
@@ -34,19 +34,19 @@ public class JsonReader {
     private int movement;
     private int sanity;
     private int credit;
-    Role role;
+
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads role from file and returns it;
     // throws IOException if an error occurs reading data from file
     public Role read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseWorkRoom(jsonObject);
+        return parseRoleCard(jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -61,8 +61,8 @@ public class JsonReader {
     }
 
 
-    // EFFECTS: parses workroom from JSON object and returns it
-    private Role parseWorkRoom(JSONObject jsonObject) {
+    // EFFECTS: parses role card from JSON object and returns it
+    private Role parseRoleCard(JSONObject jsonObject) {
         name = jsonObject.getString("name");
         age = jsonObject.getInt("age");
         gender = jsonObject.getString("gender");
@@ -88,8 +88,8 @@ public class JsonReader {
     }
 
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to role
+    // MODIFIES: role
+    // EFFECTS: parses skills from JSON object and adds them to role card
     private void addSkills(Role role, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("skills");
         for (Object json : jsonArray) {
@@ -98,16 +98,16 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to role
+    // MODIFIES: role
+    // EFFECTS: parses skill from JSON object and adds it to role card
     private void addSkill(Role role, JSONObject jsonObject) {
         String skillName = jsonObject.getString("Skill name");
         int skillPoints = jsonObject.getInt("Skill points");
         role.addSkills(new Skill(skillName, skillPoints));
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to role
+    // MODIFIES: role
+    // EFFECTS: parses items from JSON object and adds them to role card
     private void addItems(Role role, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("items");
         for (Object json : jsonArray) {
@@ -116,13 +116,15 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to role
+    // MODIFIES: role
+    // EFFECTS: parses item from JSON object and adds it to role card
     private void addItem(Role role, JSONObject jsonObject) {
         String itemName = jsonObject.getString("Item name");
         role.addItem(itemName);
     }
 
+    // MODIFIES: role
+    // EFFECTS: parses states from JSON object and adds the to role card
     private void setRole(Role role, JSONObject jsonObject) {
         role.setStrength(strength);
         role.setDexterity(dexterity);

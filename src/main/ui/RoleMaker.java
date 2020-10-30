@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+// some parts of this class is inspired by JsonSerializationDemo
 public class RoleMaker {
     private static final String JSON_STORE = "./data/Role.json";
     private final Scanner input = new Scanner(System.in);
@@ -468,7 +469,7 @@ public class RoleMaker {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads role card from file
     private void loadRoleCard() {
         try {
             role = jsonReader.read();

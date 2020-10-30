@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+// some parts of this class is inspired by JsonSerializationDemo
 // Represent a character having name, age, gender, states, skills, and items.
 public class Role implements Writable {
     private String name;            // Character's name
@@ -473,9 +474,6 @@ public class Role implements Writable {
     }
 
 
-
-
-
     public void setHp(int hp) {
         this.hp = hp;
     }
@@ -483,8 +481,6 @@ public class Role implements Writable {
     public void setLuck(int luck) {
         this.luck = luck;
     }
-
-
 
     public void setJobName(String jobName) {
         job.setJobName(jobName);

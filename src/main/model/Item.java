@@ -6,6 +6,7 @@ import persistence.Writable;
 public class Item implements Writable {
     protected String itemName;
 
+    //EFFECTS: creat a item with name None.
     public Item() {
         itemName = "None";
     }
