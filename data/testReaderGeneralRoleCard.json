@@ -1,0 +1,55 @@
+{
+    "APP": 10,
+    "SAN": 15,
+    "CON": 5,
+    "gender": "male",
+    "SIZ": 10,
+    "hp": 15,
+    "free skill points": 15,
+    "bonus damage": 20,
+    "INT": 10,
+    "STR": 5,
+    "skills": [
+        {
+            "Skill name": "Art",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Bargain",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "History",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Library Use",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Persuade",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Photography",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Psychology",
+            "Skill points": 0
+        }
+    ],
+    "MOV": 20,
+    "DEX": 5,
+    "EDU": 10,
+    "name": "Ding",
+    "POW": 5,
+    "LUC": 15,
+    "job": "Artist",
+    "credit": 30,
+    "items": [
+        {"Item name": "Bag"},
+        {"Item name": "Knife"}
+    ],
+    "age": 22
+}
