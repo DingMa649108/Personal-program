@@ -6,22 +6,43 @@ import model.Skill;
 import persistence.JsonWriter;
 import persistence.JsonReader;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
 // some parts of this class is inspired by JsonSerializationDemo
 // link for JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
-public class RoleMaker {
+public class RoleMaker implements ActionListener {
     private static final String JSON_STORE = "./data/Role.json";
     private final Scanner input = new Scanner(System.in);
-    private Role role;
+    protected Role role;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+    JFrame frame;
+    JButton button;
+    JPanel panel;
+    JLabel label;
 
 
     //EFFECTS: run the role maker application
     public RoleMaker() {
+        frame = new JFrame();
+
+        label = new JLabel();
+
+        panel = new JPanel();
+        panel.setBorder(BorderFactory.createEmptyBorder(100,100,100,100));
+        panel.setLayout(new GridLayout(0,1));
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setSize(1000,1000);
+        frame.setVisible(true);
+        frame.setResizable(true);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         runRoleMaker();
@@ -41,30 +62,106 @@ public class RoleMaker {
     // 4.display the role card
     // 5.quit program
     public void mainMenu() {
-        System.out.println("\nPlease choose one of following\n" + "1. Make role card\n"
-                + "2. Actions(Please make role first before choosing action)\n"
-                + "3. roll\n" + "4. Display role card\n"
-                + "5. Save role card\n" + "6. Load role card\n"
-                + "7. Quit\n");
-        int choice = input.nextInt();
-        input.nextLine();
-        if (choice == 1) {
-            cardMenu(role);
-        } else if (choice == 2) {
-            actionMenu(role);
-        } else if (choice == 3) {
-            roll(role);
-        } else if (choice == 4) {
-            displayRoleCard(role);
-        } else if (choice == 5) {
-            saveRoleCard();
-        } else if (choice == 6) {
-            loadRoleCard();
-        } else if (choice == 7) {
-            quit();
-        }
-        mainMenu();
+        panel.removeAll();
+        JLabel label = new JLabel("Please choose one of following:");
+        panel.add(label);
+        setRoleCardButton();
+        setActionButton();
+        setRollButton();
+        setDisplayButton();
+        setSaveButton();
+        setLoadButton();
+        setQuitButton();
+        frame.add(panel,BorderLayout.CENTER);
+        panel.revalidate();
+        panel.repaint();
     }
+
+    public void setRoleCardButton() {
+        JButton button = new JButton("1. Make role card");
+        button.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        cardMenu(role);
+                    }
+                }
+        );
+        panel.add(button);
+    }
+
+    public void setActionButton() {
+        JButton button = new JButton("2. Actions(Please make role first before choosing action)");
+        button.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        actionMenu(role);
+                    }
+                }
+        );
+        panel.add(button);
+    }
+
+    public void setRollButton() {
+        JButton button = new JButton("3. roll");
+        button.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        roll(role);
+                    }
+                }
+        );
+        panel.add(button);
+    }
+
+    public void setDisplayButton() {
+        JButton button = new JButton("4. Display role card");
+        button.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        displayRoleCard(role);
+                    }
+                }
+        );
+        panel.add(button);
+    }
+
+    public void setSaveButton() {
+        JButton button = new JButton("5. Save role card");
+        button.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        saveRoleCard();
+                    }
+                }
+        );
+        panel.add(button);
+    }
+
+    public void setLoadButton() {
+        JButton button = new JButton("6. Load role card");
+        button.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        loadRoleCard();
+                    }
+                }
+        );
+        panel.add(button);
+    }
+
+    public void setQuitButton() {
+        JButton button = new JButton("7. Quit");
+        button.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        System.exit(0);
+                    }
+                }
+        );
+        panel.add(button);
+    }
+
+
 
     //MODIFIES: this
     //EFFECTS: display the role menu and allow users to creat and manage their role card
@@ -77,30 +174,50 @@ public class RoleMaker {
     // 7.open item menu
     // 8.back to previous menu
     public void cardMenu(Role role) {
-        System.out.println("\nPlease choose one of following\n" + "(please follow the order from 1 to 7)\n"
-                + "(Please type 8 after finishing editing)\n" + "1. Set name\n" + "2. Set age\n" + "3. Set gender\n"
-                + "4. Set job\n" + "5. Set states\n" + "6. Skill\n" + "7. Item\n" + "8. Previous menu\n");
-        int choice = input.nextInt();
-        input.nextLine();
-        if (choice == 1) {
-            setName(role);
-        } else if (choice == 2) {
-            setAge(role);
-        } else if (choice == 3) {
-            setGender(role);
-        } else if (choice == 4) {
-            jobMenu(role);
-        } else if (choice == 5) {
-            setUpStates(role);
-        } else if (choice == 6) {
-            skillMenu(role);
-        } else if (choice == 7) {
-            itemMenu(role);
-        } else {
-            mainMenu();
-        }
-        cardMenu(role);
+        panel.removeAll();
+        JLabel label = new JLabel("Please choose one of following: ");
+        JLabel label0 = new JLabel("(please follow the order from 1 to 7. Please type 8 after finishing editing)");
+        panel.add(label);
+        panel.add(label0);
+        setNameButton();
+        JButton button2 = new JButton("2. Set age");
+        JButton button3 = new JButton("3. Set gender");
+        JButton button4 = new JButton("4. Set job");
+        JButton button5 = new JButton("5. Set states");
+        JButton button6 = new JButton("6. Skill");
+        JButton button7 = new JButton("7. Item");
+        JButton button8 = new JButton("8. Previous menu");
+        frame.add(panel,BorderLayout.CENTER);
+        panel.revalidate();
+        panel.repaint();
     }
+
+    public void setNameButton() {
+        JButton button = new JButton("1. Set name");
+        button.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        panel.removeAll();
+                        JTextField field = new JTextField(5);
+                        JButton button1 = new JButton("Set name");
+                        panel.add(field);
+                        panel.add(button1);
+                        frame.add(panel);
+                        button1.addActionListener(new ActionListener() {
+                                    public void actionPerformed(ActionEvent e) {
+                                        role.setName(field.getText());
+                                        cardMenu(role);
+                                    }
+                                }
+                        );
+                        panel.revalidate();
+                        panel.repaint();
+                    }
+                }
+        );
+        panel.add(button);
+    }
+
+
 
     //MODIFIES: this
     //EFFECTS: display the job menu and allow users to choose the job for the role
@@ -415,46 +532,57 @@ public class RoleMaker {
 
     //EFFECTS: display the information on role card user created
     public void displayRoleCard(Role role) {
-        System.out.println("Role Card");
-        System.out.println("Name: " + role.getName());
-        System.out.println("Age: " + role.getAge());
-        System.out.println("Gender: " + role.getGender());
-        System.out.println("HP: " + role.getHp() + "\t\tSAN: " + role.getSanity());
-        System.out.println("Job: " + role.getJob().getName());
+        panel.removeAll();
+        panel.add(new JLabel("Role Card"));
+        panel.add(new JLabel("Name: " + role.getName()));
+        panel.add(new JLabel("Age: " + role.getAge()));
+        panel.add(new JLabel("Gender: " + role.getGender()));
+        panel.add(new JLabel("HP: " + role.getHp() + "\t\tSAN: " + role.getSanity()));
+        panel.add(new JLabel("Job: " + role.getJob().getName()));
         displayStates(role);
-        System.out.println("Skills: ");
-        System.out.print(role.getSkillList().toString());
-        System.out.println("\nItems: ");
-        System.out.print("[");
+        panel.add(new JLabel("Skills: "));
+        panel.add(new JLabel(role.getSkillList().toString()));
+        panel.add(new JLabel("\nItems: "));
         for (Item item: role.getItemList()) {
-            System.out.print(item.getItemName() + ", ");
+            panel.add(new JLabel(item.getItemName() + ", "));
         }
-        System.out.print("]");
+        panel.revalidate();
+        panel.repaint();
+        JButton button = new JButton("Back");
+        button.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        mainMenu();
+                    }
+                }
+        );
+        panel.add(button);
+        frame.add(panel);
     }
 
     //EFFECTS: display the states of user's role.
     // And calculate half and fifth value os each states and display then in brackets follow each state
     public void displayStates(Role role) {
-        System.out.println("STR: " + role.getStrength()
+        panel.add(new JLabel("STR: " + role.getStrength()
                 + "(" + role.halfValue(role.getStrength()) + " " + role.fifthValue(role.getStrength()) + ")"
                 + "\tAPP: " + role.getAppearance()
-                + "(" + role.halfValue(role.getAppearance()) + " " + role.fifthValue(role.getAppearance()) + ")");
-        System.out.println("CON: " + role.getConstitution()
+                + "(" + role.halfValue(role.getAppearance()) + " " + role.fifthValue(role.getAppearance()) + ")"));
+        panel.add(new JLabel("CON: " + role.getConstitution()
                 + "(" + role.halfValue(role.getConstitution()) + " " + role.fifthValue(role.getConstitution()) + ")"
                 + "\tSIZ: " + role.getSize()
-                + "(" + role.halfValue(role.getSize()) + " " + role.fifthValue(role.getSize()) + ")");
-        System.out.println("POW: " + role.getPower()
+                + "(" + role.halfValue(role.getSize()) + " " + role.fifthValue(role.getSize()) + ")"));
+        panel.add(new JLabel("POW: " + role.getPower()
                 + "(" + role.halfValue(role.getPower()) + " " + role.fifthValue(role.getPower()) + ")"
                 + "\tINT: " + role.getIntelligence()
-                + "(" + role.halfValue(role.getIntelligence()) + " " + role.fifthValue(role.getIntelligence()) + ")");
-        System.out.println("DEX: " + role.getDexterity()
+                + "(" + role.halfValue(role.getIntelligence()) + " " + role.fifthValue(role.getIntelligence()) + ")"));
+        panel.add(new JLabel("DEX: " + role.getDexterity()
                 + "(" + role.halfValue(role.getDexterity()) + " " + role.fifthValue(role.getDexterity()) + ")"
                 + "\tEDU: " + role.getEducation()
-                + "(" + role.halfValue(role.getEducation()) + " " + role.fifthValue(role.getEducation()) + ")");
-        System.out.println("LUC: " + role.getLuck()
+                + "(" + role.halfValue(role.getEducation()) + " " + role.fifthValue(role.getEducation()) + ")"));
+        panel.add(new JLabel("LUC: " + role.getLuck()
                 + "(" + role.halfValue(role.getLuck()) + " " + role.fifthValue(role.getLuck()) + ")"
-                + "\tDMG: " + role.getBonusDamage());
-        System.out.println("MOV: " + role.getMovement() + "\tCredit: " + role.getCredit());
+                + "\tDMG: " + role.getBonusDamage()));
+        panel.add(new JLabel("MOV: " + role.getMovement() + "\tCredit: " + role.getCredit()));
     }
 
     // EFFECTS: saves the role card to file
@@ -483,5 +611,10 @@ public class RoleMaker {
     //EFFECTS: quit the application
     public void quit() {
         System.exit(0);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.cardMenu(role);
     }
 }
