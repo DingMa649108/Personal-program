@@ -412,7 +412,7 @@ public class RoleMaker implements ActionListener {
         job.add(setStats);
         setStats.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setSetStatsButton();
+                setSetStatsButton(role);
             }
         }
         );
@@ -689,14 +689,14 @@ public class RoleMaker implements ActionListener {
 
     //MODIFIES: this
     //EFFECTS: creat a button that sets role's states
-    public void setSetStatsButton() {
+    public void setSetStatsButton(Role role) {
         panel.removeAll();
         JButton button1 = new JButton("Set stats");
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                role.setStates();
+                setUpStates(role);
                 role.addJobSkills();
                 cardMenu(role);
                 panel.revalidate();
