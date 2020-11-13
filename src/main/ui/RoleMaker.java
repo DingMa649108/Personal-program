@@ -237,7 +237,7 @@ public class RoleMaker implements ActionListener {
         name.add(setName);
         setName.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        setSetNameButton();
+                        setNameButton();
                     }
                 }
         );
@@ -246,7 +246,7 @@ public class RoleMaker implements ActionListener {
 
     //MODIFIES: this
     //EFFECTS: creat a filed that accepts user's input and button that sets user's input as role's name
-    public void setSetNameButton() {
+    public void setNameButton() {
         panel.removeAll();
         JButton button1 = new JButton("Set name");
         JTextField field = new JTextField(5);
@@ -273,7 +273,7 @@ public class RoleMaker implements ActionListener {
         age.add(setAge);
         setAge.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setSetAgeButton();
+                setAgeButton();
             }
         }
         );
@@ -282,7 +282,7 @@ public class RoleMaker implements ActionListener {
 
     //MODIFIES: this
     //EFFECTS: creat a filed that accepts user's input and button that sets user's input as role's age
-    public void setSetAgeButton() {
+    public void setAgeButton() {
         panel.removeAll();
         JButton button1 = new JButton("Set age");
         JTextField field = new JTextField(5);
@@ -310,7 +310,7 @@ public class RoleMaker implements ActionListener {
         gender.add(setGender);
         setGender.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setSetGenderButton();
+                setGenderButton();
             }
         }
         );
@@ -319,7 +319,7 @@ public class RoleMaker implements ActionListener {
 
     //MODIFIES: this
     //EFFECTS: creat a filed that accepts user's input and button that sets user's input as role's gender
-    public void setSetGenderButton() {
+    public void setGenderButton() {
         panel.removeAll();
         JButton button1 = new JButton("Set gender");
         JTextField field = new JTextField(5);
@@ -348,9 +348,9 @@ public class RoleMaker implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 panel.removeAll();
                 panel.add(new JLabel("Please select job for your role"));
-                setSetJobButtonArtist();
-                setSetJobButtonNurse();
-                setSetJobButtonPoliceman();
+                setJobButtonArtist();
+                setJobButtonNurse();
+                setJobButtonPoliceman();
                 panel.revalidate();
                 panel.repaint();
             }
@@ -361,7 +361,7 @@ public class RoleMaker implements ActionListener {
 
     //MODIFIES: this
     //EFFECTS: creat a  button that sets user's role's job to Artist
-    public void setSetJobButtonArtist() {
+    public void setJobButtonArtist() {
         JButton button1 = new JButton("Set job to artist");
         panel.add(button1);
         frame.add(panel);
@@ -376,7 +376,7 @@ public class RoleMaker implements ActionListener {
 
     //MODIFIES: this
     //EFFECTS: creat a  button that sets user's role's job to Nurse
-    public void setSetJobButtonNurse() {
+    public void setJobButtonNurse() {
         JButton button1 = new JButton("Set job to nurse");
         panel.add(button1);
         frame.add(panel);
@@ -391,7 +391,7 @@ public class RoleMaker implements ActionListener {
 
     //MODIFIES: this
     //EFFECTS: creat a  button that sets user's role's job to Policeman
-    public void setSetJobButtonPoliceman() {
+    public void setJobButtonPoliceman() {
         JButton button1 = new JButton("Set job to policeman");
         panel.add(button1);
         frame.add(panel);
@@ -438,7 +438,7 @@ public class RoleMaker implements ActionListener {
         skill.add(setName);
         setName.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setSetAddSkillButton();
+                setSetAddSkillButton(role);
             }
         }
         );
@@ -452,7 +452,7 @@ public class RoleMaker implements ActionListener {
         skill.add(setName);
         setName.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setSetAddSkillPointsButton();
+                setSetAddSkillPointsButton(role);
             }
         }
         );
@@ -462,11 +462,12 @@ public class RoleMaker implements ActionListener {
     //MODIFIES: this
     //EFFECTS: creat two field that accepts user's input
     // and a button that add skill points entered to role's skill entered
-    public void setSetAddSkillPointsButton() {
+    public void setSetAddSkillPointsButton(Role role) {
         panel.removeAll();
         JButton button1 = new JButton("Add skill points");
         JTextField field = new JTextField(5);
         JTextField field2 = new JTextField(5);
+        panel.add(new JLabel("Your free skill points: " + role.getFreeSkillPoints()));
         panel.add(new JLabel("Please enter skill name below"));
         panel.add(field);
         panel.add(new JLabel("Please enter skill points you want to add below"));
@@ -491,7 +492,7 @@ public class RoleMaker implements ActionListener {
         skill.add(setName);
         setName.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setSetRemoveSkillPointsButton();
+                setRemoveSkillPointsButton(role);
             }
         }
         );
@@ -501,11 +502,12 @@ public class RoleMaker implements ActionListener {
     //MODIFIES: this
     //EFFECTS: creat two field that accepts user's input
     // and a button that remove skill points entered from role's skill entered
-    public void setSetRemoveSkillPointsButton() {
+    public void setRemoveSkillPointsButton(Role role) {
         panel.removeAll();
         JButton button1 = new JButton("Remove skill points");
         JTextField field = new JTextField(5);
         JTextField field2 = new JTextField(5);
+        panel.add(new JLabel("Your free skill points: " + role.getFreeSkillPoints()));
         panel.add(new JLabel("Please enter skill name below"));
         panel.add(field);
         panel.add(new JLabel("Please enter skill points you want to remove below"));
@@ -530,7 +532,7 @@ public class RoleMaker implements ActionListener {
         skill.add(setName);
         setName.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setRemoveSkillButton();
+                setRemoveSkillButton(role);
             }
         }
         );
@@ -540,10 +542,11 @@ public class RoleMaker implements ActionListener {
     //MODIFIES: this
     //EFFECTS: creat a field that accepts user's input
     // and a button that remove skill entered from role's skill list
-    public void setRemoveSkillButton() {
+    public void setRemoveSkillButton(Role role) {
         panel.removeAll();
         JButton button1 = new JButton("Remove skill");
         JTextField field = new JTextField(5);
+        panel.add(new JLabel("Your free skill points: " + role.getFreeSkillPoints()));
         panel.add(new JLabel("Please enter skill name you want to remove below"));
         panel.add(field);
         panel.add(button1);
@@ -660,11 +663,12 @@ public class RoleMaker implements ActionListener {
     //MODIFIES: this
     //EFFECTS: creat two field that accepts user's input
     // and a button that add skill entered with skill points entered to role's skill list.
-    public void setSetAddSkillButton() {
+    public void setSetAddSkillButton(Role role) {
         panel.removeAll();
         JButton button1 = new JButton("Add skill");
         JTextField field = new JTextField(5);
         JTextField field2 = new JTextField(5);
+        panel.add(new JLabel("Your free skill points: " + role.getFreeSkillPoints()));
         panel.add(new JLabel("Please enter skill name below"));
         panel.add(field);
         panel.add(new JLabel("Please enter skill points below"));
@@ -1051,7 +1055,7 @@ public class RoleMaker implements ActionListener {
         panel.revalidate();
         panel.repaint();
         setBackToMainButton();
-        panel.add(button);
+//        panel.add(button);
         frame.add(panel);
     }
 
