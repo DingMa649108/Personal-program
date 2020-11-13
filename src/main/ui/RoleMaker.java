@@ -5,14 +5,22 @@ import model.Role;
 import model.Skill;
 import persistence.JsonWriter;
 import persistence.JsonReader;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import static java.lang.Integer.parseInt;
 
 // some parts of this class is inspired by JsonSerializationDemo
 // link for JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
@@ -26,6 +34,7 @@ public class RoleMaker implements ActionListener {
     JButton button;
     JPanel panel;
     JLabel label;
+    JMenuBar menuBar;
 
 
     //EFFECTS: run the role maker application
@@ -77,6 +86,8 @@ public class RoleMaker implements ActionListener {
         panel.repaint();
     }
 
+    //MODIFIES: this
+    //EFFECTS: creat a button that calls card menu
     public void setRoleCardButton() {
         JButton button = new JButton("1. Make role card");
         button.addActionListener(
@@ -89,6 +100,8 @@ public class RoleMaker implements ActionListener {
         panel.add(button);
     }
 
+    //MODIFIES: this
+    //EFFECTS: creat a button that calls action menu
     public void setActionButton() {
         JButton button = new JButton("2. Actions(Please make role first before choosing action)");
         button.addActionListener(
@@ -101,6 +114,8 @@ public class RoleMaker implements ActionListener {
         panel.add(button);
     }
 
+    //MODIFIES: this
+    //EFFECTS: creat a button that calls roll menu
     public void setRollButton() {
         JButton button = new JButton("3. roll");
         button.addActionListener(
@@ -113,6 +128,8 @@ public class RoleMaker implements ActionListener {
         panel.add(button);
     }
 
+    //MODIFIES: this
+    //EFFECTS: creat a button that display role card
     public void setDisplayButton() {
         JButton button = new JButton("4. Display role card");
         button.addActionListener(
@@ -125,30 +142,52 @@ public class RoleMaker implements ActionListener {
         panel.add(button);
     }
 
+    //MODIFIES: this
+    //EFFECTS: creat a button that saves the role card
     public void setSaveButton() {
         JButton button = new JButton("5. Save role card");
         button.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         saveRoleCard();
+                        InputStream in;
+                        try {
+                            in = new FileInputStream("./Sound/Saved.wav");
+                            AudioStream audio = new AudioStream(in);
+                            AudioPlayer.player.start(audio);
+                        } catch (Exception fileNotFoundException) {
+                            fileNotFoundException.printStackTrace();
+                        }
                     }
                 }
         );
         panel.add(button);
     }
 
+    //MODIFIES: this
+    //EFFECTS: creat a button that loads the role card
     public void setLoadButton() {
         JButton button = new JButton("6. Load role card");
         button.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         loadRoleCard();
+                        InputStream in;
+                        try {
+                            in = new FileInputStream("./Sound/Loaded.wav");
+                            AudioStream audio = new AudioStream(in);
+                            AudioPlayer.player.start(audio);
+                        } catch (Exception fileNotFoundException) {
+                            fileNotFoundException.printStackTrace();
+                        }
                     }
                 }
         );
         panel.add(button);
     }
 
+    //MODIFIES: this
+    //EFFECTS: creat a button that quits the program
     public void setQuitButton() {
         JButton button = new JButton("7. Quit");
         button.addActionListener(
@@ -175,49 +214,510 @@ public class RoleMaker implements ActionListener {
     // 8.back to previous menu
     public void cardMenu(Role role) {
         panel.removeAll();
-        JLabel label = new JLabel("Please choose one of following: ");
-        JLabel label0 = new JLabel("(please follow the order from 1 to 7. Please type 8 after finishing editing)");
-        panel.add(label);
-        panel.add(label0);
-        setNameButton();
-        JButton button2 = new JButton("2. Set age");
-        JButton button3 = new JButton("3. Set gender");
-        JButton button4 = new JButton("4. Set job");
-        JButton button5 = new JButton("5. Set states");
-        JButton button6 = new JButton("6. Skill");
+        menuBar = new JMenuBar();
+        setNameMenu();
+        setAgeMenu();
+        setGenderMenu();
+        setJobMenu();
+        setStatsMenu();
+        setSkillMenu();
         JButton button7 = new JButton("7. Item");
-        JButton button8 = new JButton("8. Previous menu");
-        frame.add(panel,BorderLayout.CENTER);
+        setBackMenu();
+        frame.setJMenuBar(menuBar);
+        displayRoleCard(role);
         panel.revalidate();
         panel.repaint();
     }
 
-    public void setNameButton() {
-        JButton button = new JButton("1. Set name");
-        button.addActionListener(new ActionListener() {
+    //MODIFIES: this
+    //EFFECTS: creat a menu and menu item that sets role's name
+    public void setNameMenu() {
+        JMenu name = new JMenu("Name");
+        JMenuItem setName = new JMenuItem("set name");
+        name.add(setName);
+        setName.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        panel.removeAll();
-                        JTextField field = new JTextField(5);
-                        JButton button1 = new JButton("Set name");
-                        panel.add(field);
-                        panel.add(button1);
-                        frame.add(panel);
-                        button1.addActionListener(new ActionListener() {
-                                    public void actionPerformed(ActionEvent e) {
-                                        role.setName(field.getText());
-                                        cardMenu(role);
-                                    }
-                                }
-                        );
-                        panel.revalidate();
-                        panel.repaint();
+                        setSetNameButton();
                     }
                 }
         );
-        panel.add(button);
+        menuBar.add(name);
     }
 
+    //MODIFIES: this
+    //EFFECTS: creat a filed that accepts user's input and button that sets user's input as role's name
+    public void setSetNameButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("Set name");
+        JTextField field = new JTextField(5);
+        panel.add(new JLabel("Please enter name for your role"));
+        panel.add(field);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                role.setName(field.getText());
+                cardMenu(role);
+            }
+        }
+        );
+        panel.revalidate();
+        panel.repaint();
+    }
 
+    //MODIFIES: this
+    //EFFECTS: creat a menu and menu item that sets role's age
+    public void setAgeMenu() {
+        JMenu age = new JMenu("Age");
+        JMenuItem setAge = new JMenuItem("set age");
+        age.add(setAge);
+        setAge.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSetAgeButton();
+            }
+        }
+        );
+        menuBar.add(age);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a filed that accepts user's input and button that sets user's input as role's age
+    public void setSetAgeButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("Set age");
+        JTextField field = new JTextField(5);
+        panel.add(new JLabel("Please enter age for your role(please enter integer)"));
+        panel.add(field);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int age = parseInt(field.getText());
+                role.setAge(age);
+                cardMenu(role);
+            }
+        }
+        );
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu and menu item that sets role's gender
+    public void setGenderMenu() {
+        JMenu gender = new JMenu("Gender");
+        JMenuItem setGender = new JMenuItem("set gender");
+        gender.add(setGender);
+        setGender.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSetGenderButton();
+            }
+        }
+        );
+        menuBar.add(gender);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a filed that accepts user's input and button that sets user's input as role's gender
+    public void setSetGenderButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("Set gender");
+        JTextField field = new JTextField(5);
+        panel.add(new JLabel("Please enter gender for your role"));
+        panel.add(field);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                role.setGender(field.getText());
+                cardMenu(role);
+            }
+        }
+        );
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu and menu item that sets role's job
+    public void setJobMenu() {
+        JMenu job = new JMenu("Job");
+        JMenuItem setJob = new JMenuItem("set job");
+        job.add(setJob);
+        setJob.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                panel.removeAll();
+                panel.add(new JLabel("Please select job for your role"));
+                setSetJobButtonArtist();
+                setSetJobButtonNurse();
+                setSetJobButtonPoliceman();
+                panel.revalidate();
+                panel.repaint();
+            }
+        }
+        );
+        menuBar.add(job);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a  button that sets user's role's job to Artist
+    public void setSetJobButtonArtist() {
+        JButton button1 = new JButton("Set job to artist");
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                role.setJobArtist();
+                cardMenu(role);
+            }
+        }
+        );
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a  button that sets user's role's job to Nurse
+    public void setSetJobButtonNurse() {
+        JButton button1 = new JButton("Set job to nurse");
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                role.setJobNurse();
+                cardMenu(role);
+            }
+        }
+        );
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a  button that sets user's role's job to Policeman
+    public void setSetJobButtonPoliceman() {
+        JButton button1 = new JButton("Set job to policeman");
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                role.setJobPoliceman();
+                cardMenu(role);
+            }
+        }
+        );
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu and menu item that sets role's state
+    public void setStatsMenu() {
+        JMenu job = new JMenu("Stats");
+        JMenuItem setStats = new JMenuItem("set stats");
+        job.add(setStats);
+        setStats.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSetStatsButton();
+            }
+        }
+        );
+        menuBar.add(job);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu that sets role's skill
+    public void setSkillMenu() {
+        JMenu skill = new JMenu("Skill");
+        setSkillMenuItemAddSkill(skill);
+        setSkillMenuItemAddSkillPoints(skill);
+        setSkillMenuItemRemoveSkill(skill);
+        setSkillMenuItemRemoveSkillPoints(skill);
+        setSkillMenuItemGetStrength(skill);
+        setSkillMenuItemGetWeakness(skill);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu item that add skill to role's skill list
+    public void setSkillMenuItemAddSkill(JMenu skill) {
+        JMenuItem setName = new JMenuItem("Add skill");
+        skill.add(setName);
+        setName.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSetAddSkillButton();
+            }
+        }
+        );
+        menuBar.add(skill);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu item that add skill points to role's skill
+    public void setSkillMenuItemAddSkillPoints(JMenu skill) {
+        JMenuItem setName = new JMenuItem("Add skill points");
+        skill.add(setName);
+        setName.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSetAddSkillPointsButton();
+            }
+        }
+        );
+        menuBar.add(skill);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat two field that accepts user's input
+    // and a button that add skill points entered to role's skill entered
+    public void setSetAddSkillPointsButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("Add skill points");
+        JTextField field = new JTextField(5);
+        JTextField field2 = new JTextField(5);
+        panel.add(new JLabel("Please enter skill name below"));
+        panel.add(field);
+        panel.add(new JLabel("Please enter skill points you want to add below"));
+        panel.add(field2);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                role.addSkillsPoints(field.getText(), parseInt(field2.getText()));
+                cardMenu(role);
+            }
+        }
+        );
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu item that remove skill points from role's skill
+    public void setSkillMenuItemRemoveSkillPoints(JMenu skill) {
+        JMenuItem setName = new JMenuItem("Remove skill points");
+        skill.add(setName);
+        setName.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSetRemoveSkillPointsButton();
+            }
+        }
+        );
+        menuBar.add(skill);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat two field that accepts user's input
+    // and a button that remove skill points entered from role's skill entered
+    public void setSetRemoveSkillPointsButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("Remove skill points");
+        JTextField field = new JTextField(5);
+        JTextField field2 = new JTextField(5);
+        panel.add(new JLabel("Please enter skill name below"));
+        panel.add(field);
+        panel.add(new JLabel("Please enter skill points you want to remove below"));
+        panel.add(field2);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                role.removeSkillPoints(field.getText(), parseInt(field2.getText()));
+                cardMenu(role);
+            }
+        }
+        );
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu item that remove skill from role's skill list
+    public void setSkillMenuItemRemoveSkill(JMenu skill) {
+        JMenuItem setName = new JMenuItem("Remove skill");
+        skill.add(setName);
+        setName.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setRemoveSkillButton();
+            }
+        }
+        );
+        menuBar.add(skill);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a field that accepts user's input
+    // and a button that remove skill entered from role's skill list
+    public void setRemoveSkillButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("Remove skill");
+        JTextField field = new JTextField(5);
+        panel.add(new JLabel("Please enter skill name you want to remove below"));
+        panel.add(field);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                role.removeSkill(field.getText());
+                cardMenu(role);
+            }
+        }
+        );
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu item that gets and displays role's strengths
+    public void setSkillMenuItemGetStrength(JMenu skill) {
+        JMenuItem getStrength = new JMenuItem("Get strength");
+        skill.add(getStrength);
+        getStrength.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setGetStrengthButton();
+            }
+        }
+        );
+        menuBar.add(skill);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a button that gets and displays role's strengths
+    public void setGetStrengthButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("Get strength");
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                panel.removeAll();
+                List<Skill> skillList = new ArrayList<>();
+                for (Skill s : role.getSkillList()) {
+                    if (s.getSkillPoints() >= 45) {
+                        skillList.add(s);
+                    }
+                }
+                panel.add(new JLabel("Your role has following strength: "));
+                panel.add(new JLabel(skillList.toString()));
+                setBackRoleMenuButton();
+                panel.revalidate();
+                panel.repaint();
+            }
+        }
+        );
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu item that allows user to go back to card menu
+    public void setBackRoleMenuButton() {
+        JButton button1 = new JButton("Back");
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardMenu(role);
+            }
+        }
+        );
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu item that gets and displays role's weakness
+    public void setSkillMenuItemGetWeakness(JMenu skill) {
+        JMenuItem getStrength = new JMenuItem("Get weakness");
+        skill.add(getStrength);
+        getStrength.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setGetWeaknessButton();
+            }
+        }
+        );
+        menuBar.add(skill);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a button that gets and displays role's strengths
+    public void setGetWeaknessButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("Get weakness");
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                panel.removeAll();
+                List<Skill> skillList = new ArrayList<>();
+                for (Skill s : role.getSkillList()) {
+                    if (s.getSkillPoints() < 45) {
+                        skillList.add(s);
+                    }
+                }
+                panel.add(new JLabel("Your role has following weakness: "));
+                panel.add(new JLabel(skillList.toString()));
+                setBackRoleMenuButton();
+                panel.revalidate();
+                panel.repaint();
+            }
+        }
+        );
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat two field that accepts user's input
+    // and a button that add skill entered with skill points entered to role's skill list.
+    public void setSetAddSkillButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("Add skill");
+        JTextField field = new JTextField(5);
+        JTextField field2 = new JTextField(5);
+        panel.add(new JLabel("Please enter skill name below"));
+        panel.add(field);
+        panel.add(new JLabel("Please enter skill points below"));
+        panel.add(field2);
+        panel.add(button1);
+        frame.add(panel);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                role.addSkills(field.getText(), parseInt(field2.getText()));
+                cardMenu(role);
+            }
+        }
+        );
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a button that sets role's states
+    public void setSetStatsButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("Set stats");
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                role.setStates();
+                role.addJobSkills();
+                cardMenu(role);
+                panel.revalidate();
+                panel.repaint();
+            }
+        }
+        );
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu item that allows user to go to other menus
+    public void setBackMenu() {
+        JMenu name = new JMenu("Other menu");
+        JMenuItem setName = new JMenuItem("main menu");
+        name.add(setName);
+        setName.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainMenu();
+            }
+        }
+        );
+        menuBar.add(name);
+    }
 
     //MODIFIES: this
     //EFFECTS: display the job menu and allow users to choose the job for the role
@@ -543,11 +1043,21 @@ public class RoleMaker implements ActionListener {
         panel.add(new JLabel("Skills: "));
         panel.add(new JLabel(role.getSkillList().toString()));
         panel.add(new JLabel("\nItems: "));
+        String items = "";
         for (Item item: role.getItemList()) {
-            panel.add(new JLabel(item.getItemName() + ", "));
+            items += (item.getItemName() + ", ");
         }
+        panel.add(new JLabel(items));
         panel.revalidate();
         panel.repaint();
+        setBackToMainButton();
+        panel.add(button);
+        frame.add(panel);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a button that allows user to go back to main menu.
+    public void setBackToMainButton() {
         JButton button = new JButton("Back");
         button.addActionListener(
                 new ActionListener() {
@@ -556,8 +1066,6 @@ public class RoleMaker implements ActionListener {
                     }
                 }
         );
-        panel.add(button);
-        frame.add(panel);
     }
 
     //EFFECTS: display the states of user's role.

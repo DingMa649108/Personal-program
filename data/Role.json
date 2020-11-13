@@ -1,14 +1,14 @@
 {
-    "APP": 60,
-    "SAN": 70,
-    "CON": 50,
-    "gender": "male",
-    "SIZ": 65,
-    "hp": 11,
-    "free skill points": 420,
+    "APP": 20,
+    "SAN": 0,
+    "CON": 55,
+    "gender": "Male",
+    "SIZ": 80,
+    "hp": 0,
+    "free skill points": -50,
     "bonus damage": 0,
-    "INT": 90,
-    "STR": 55,
+    "INT": 40,
+    "STR": 40,
     "skills": [
         {
             "Skill name": "Drive Automobile",
@@ -41,19 +41,20 @@
         {
             "Skill name": "Persuade",
             "Skill points": 0
+        },
+        {
+            "Skill name": "Kick",
+            "Skill points": 50
         }
     ],
-    "MOV": 8,
-    "DEX": 70,
-    "EDU": 65,
-    "name": "d",
-    "POW": 70,
-    "LUC": 50,
+    "MOV": 0,
+    "DEX": 55,
+    "EDU": 50,
+    "name": "DA",
+    "POW": 35,
+    "LUC": 25,
     "job": "Policeman",
     "credit": 40,
-    "items": [
-        {"Item name": "flah light"},
-        {"Item name": "bag"}
-    ],
-    "age": 22
+    "items": [],
+    "age": 23
 }
