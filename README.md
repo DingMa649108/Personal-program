@@ -29,3 +29,13 @@ A *user stories* list:
 - As a user, I want to be able to choose the job I want from given jobs.
 - As a user, I want to be able to save my role card to file.
 - As a user, I want to be able to load my role card from file.
+
+## Phase 4: Task 2
+The option I choose to implement is type hierarchy.
+<p>The super class is Job. It represents a genetic Job class that include the most basic 
+behaviors of a Job in this program, including set and get job's name, set and get job's credit, and set and get 
+job's skill list.</p>
+<p>Artist, Nurse, and Policeman are the subclasses of Job class. Method setJob() is override
+in three of the subclasses. Each of the classes has it's own credit, name, and skill list. The setJob()
+method overridden in each subclasses helpsthem to set up their own information in order to represent three different 
+jobs. </p>
