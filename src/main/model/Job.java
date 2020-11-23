@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Job {
     protected String jobName;     // Job name
-    protected int credit;         // A measure of job class
-    List<Skill> skillList;        // A list of skill this job have
+    protected int credit;         // A measure of job's class
+    List<Skill> skillList;        // A list of skill this job has
 
     //EFFECTS: set up all information for a job
     public void setJob() {

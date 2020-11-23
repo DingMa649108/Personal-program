@@ -39,3 +39,25 @@ job's skill list.</p>
 in three of the subclasses. Each of the classes has it's own credit, name, and skill list. The setJob()
 method overridden in each subclasses helpsthem to set up their own information in order to represent three different 
 jobs. </p>
+
+## Phase 4: Task 3
+<p>There are some changes I could make to improve the code.</p>
+<p>First, there is too much code duplication within RoleMaker class. To be specific, many methods for setting buttons 
+and menu items to share is a similar code. It might be a good idea to write a helper method that receives a String name 
+as the argument that could help set up buttons with different names and reduce code duplication.</p>
+<p>Second, the Role class seems to has too many responsibilities and too many files. It manages the Role's name, age, 
+gender, Job, Skill, item, states, and even manages the dice rolling. It would be a good idea to separate these 
+responsibilities and files into several different classes. For example, file name, age, gender, and corresponding 
+methods could be a move to a class could PersonalInformationManager. Files Job and its corresponding methods could be 
+moved to a class called JobManager. List Skill and its corresponding method could be a move to a class called 
+SkillManager. List Item, and it is the corresponding method could be a move to a class called ItemManager. All the 
+states and their corresponding method to a class called StatesManager. Furthermore, lastly, dice files, and 
+corresponding methods to a class called DiceManager. In that way, each class would only have one responsibility.</p>
+<p>Third, there is some coupling between Skill class, Role class, Job class as Role class s=contains a collection of 
+Skill. It means the Role could access Skill through this file. Role class also has a field of Job that has a 
+collection of Skills. This means Role could access Skill class through Job class. Deleting the association between 
+Skill and Role would reduce the coupling for the diagram.</p>
+<p>Fourth, writing a few helper method for displaying method could help to reduce the semantic coupling between 
+classes. Similar helper method could be applied to the methods that are hard coded.</p>
+<p>Adding a few exception class could help to prevent user from entering unexpected value. It also make the
+whole program more robust.</p>
