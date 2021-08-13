@@ -221,8 +221,7 @@ public class RoleMaker implements ActionListener {
         setJobMenu();
         setStatsMenu();
         setSkillMenu();
-        JButton button7 = new JButton("7. Item");
-        setBackMenu();
+        setItemMenu();
         frame.setJMenuBar(menuBar);
         displayRoleCard(role);
         panel.revalidate();
@@ -432,6 +431,100 @@ public class RoleMaker implements ActionListener {
     }
 
     //MODIFIES: this
+    //EFFECTS: creat a menu that sets role's skill
+    public void setItemMenu() {
+        JMenu item = new JMenu("Item");
+        setItemMenuItemAddSkill(item);
+        setItemMenuItemAddSkillPoints(item);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu item that add item to role's item list
+    public void setItemMenuItemAddSkill(JMenu item) {
+        JMenuItem addItem = new JMenuItem("Add item");
+        item.add(addItem);
+        addItem.addActionListener(new ActionListener() {
+                                      public void actionPerformed(ActionEvent e) {
+                                          setAddItemButton(role);
+                                      }
+                                  }
+        );
+        menuBar.add(item);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat two field that accepts user's input
+    // and a button that add skill points entered to role's skill entered
+    public void setAddItemButton(Role role) {
+        panel.removeAll();
+        JButton button1 = new JButton("Add item");
+        JTextField field = new JTextField(5);
+        panel.add(new JLabel("Your current items: "));
+        String items = "";
+        for (Item item: role.getItemList()) {
+            items += (item.getItemName() + ", ");
+        }
+        panel.add(new JLabel(items));
+        panel.add(new JLabel("Please enter item name below"));
+        panel.add(field);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.addItem(field.getText());
+                                          cardMenu(role);
+                                      }
+                                  }
+        );
+        setBackRoleMenuButton();
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu item that remove item from role's item list
+    public void setItemMenuItemAddSkillPoints(JMenu item) {
+        JMenuItem removeItem = new JMenuItem("Remove item");
+        item.add(removeItem);
+        removeItem.addActionListener(new ActionListener() {
+                                      public void actionPerformed(ActionEvent e) {
+                                          setRemoveItemButton(role);
+                                      }
+                                  }
+        );
+        menuBar.add(item);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat two field that accepts user's input
+    // and a button that add skill points entered to role's skill entered
+    public void setRemoveItemButton(Role role) {
+        panel.removeAll();
+        JButton button1 = new JButton("Remove item");
+        JTextField field = new JTextField(5);
+        panel.add(new JLabel("Your current items: "));
+        String items = "";
+        for (Item item: role.getItemList()) {
+            items += (item.getItemName() + ", ");
+        }
+        panel.add(new JLabel(items));
+        panel.add(new JLabel("Please enter item name below"));
+        panel.add(field);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.removeItems(role.getItemsIndex(field.getText()));
+                                          cardMenu(role);
+                                      }
+                                  }
+        );
+        setBackRoleMenuButton();
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
     //EFFECTS: creat a menu item that add skill to role's skill list
     public void setSkillMenuItemAddSkill(JMenu skill) {
         JMenuItem setName = new JMenuItem("Add skill");
@@ -468,6 +561,8 @@ public class RoleMaker implements ActionListener {
         JTextField field = new JTextField(5);
         JTextField field2 = new JTextField(5);
         panel.add(new JLabel("Your free skill points: " + role.getFreeSkillPoints()));
+        panel.add(new JLabel("Your current skills: "));
+        panel.add(new JLabel(role.getSkillList().toString()));
         panel.add(new JLabel("Please enter skill name below"));
         panel.add(field);
         panel.add(new JLabel("Please enter skill points you want to add below"));
@@ -481,6 +576,7 @@ public class RoleMaker implements ActionListener {
             }
         }
         );
+        setBackRoleMenuButton();
         panel.revalidate();
         panel.repaint();
     }
@@ -508,6 +604,8 @@ public class RoleMaker implements ActionListener {
         JTextField field = new JTextField(5);
         JTextField field2 = new JTextField(5);
         panel.add(new JLabel("Your free skill points: " + role.getFreeSkillPoints()));
+        panel.add(new JLabel("Your current skills: "));
+        panel.add(new JLabel(role.getSkillList().toString()));
         panel.add(new JLabel("Please enter skill name below"));
         panel.add(field);
         panel.add(new JLabel("Please enter skill points you want to remove below"));
@@ -521,6 +619,7 @@ public class RoleMaker implements ActionListener {
             }
         }
         );
+        setBackRoleMenuButton();
         panel.revalidate();
         panel.repaint();
     }
@@ -547,6 +646,8 @@ public class RoleMaker implements ActionListener {
         JButton button1 = new JButton("Remove skill");
         JTextField field = new JTextField(5);
         panel.add(new JLabel("Your free skill points: " + role.getFreeSkillPoints()));
+        panel.add(new JLabel("Your current skills: "));
+        panel.add(new JLabel(role.getSkillList().toString()));
         panel.add(new JLabel("Please enter skill name you want to remove below"));
         panel.add(field);
         panel.add(button1);
@@ -558,6 +659,7 @@ public class RoleMaker implements ActionListener {
             }
         }
         );
+        setBackRoleMenuButton();
         panel.revalidate();
         panel.repaint();
     }
@@ -600,6 +702,7 @@ public class RoleMaker implements ActionListener {
             }
         }
         );
+        setBackRoleMenuButton();
         panel.revalidate();
         panel.repaint();
     }
@@ -656,6 +759,7 @@ public class RoleMaker implements ActionListener {
             }
         }
         );
+        setBackRoleMenuButton();
         panel.revalidate();
         panel.repaint();
     }
@@ -669,6 +773,8 @@ public class RoleMaker implements ActionListener {
         JTextField field = new JTextField(5);
         JTextField field2 = new JTextField(5);
         panel.add(new JLabel("Your free skill points: " + role.getFreeSkillPoints()));
+        panel.add(new JLabel("Your current skills: "));
+        panel.add(new JLabel(role.getSkillList().toString()));
         panel.add(new JLabel("Please enter skill name below"));
         panel.add(field);
         panel.add(new JLabel("Please enter skill points below"));
@@ -683,6 +789,7 @@ public class RoleMaker implements ActionListener {
             }
         }
         );
+        setBackRoleMenuButton();
         panel.revalidate();
         panel.repaint();
     }
@@ -706,21 +813,6 @@ public class RoleMaker implements ActionListener {
         );
         panel.revalidate();
         panel.repaint();
-    }
-
-    //MODIFIES: this
-    //EFFECTS: creat a menu item that allows user to go to other menus
-    public void setBackMenu() {
-        JMenu name = new JMenu("Other menu");
-        JMenuItem setName = new JMenuItem("main menu");
-        name.add(setName);
-        setName.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainMenu();
-            }
-        }
-        );
-        menuBar.add(name);
     }
 
     //MODIFIES: this
@@ -781,7 +873,7 @@ public class RoleMaker implements ActionListener {
         }
         skillMenu(role);
     }
-
+//
     //MODIFIES: this
     //EFFECTS: add a new skill with name and skill points inputted by users
     public void addSkill(Role role) {
@@ -1063,6 +1155,8 @@ public class RoleMaker implements ActionListener {
     //EFFECTS: creat a button that allows user to go back to main menu.
     public void setBackToMainButton() {
         JButton button = new JButton("Back");
+        panel.add(button);
+        frame.add(panel);
         button.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -1070,6 +1164,8 @@ public class RoleMaker implements ActionListener {
                     }
                 }
         );
+        panel.revalidate();
+        panel.repaint();
     }
 
     //EFFECTS: display the states of user's role.

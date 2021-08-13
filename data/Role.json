@@ -1,32 +1,64 @@
 {
-    "APP": 0,
-    "SAN": 0,
-    "CON": 0,
-    "gender": "None",
-    "SIZ": 0,
-    "hp": 0,
-    "free skill points": -80,
+    "APP": 55,
+    "SAN": 60,
+    "CON": 60,
+    "gender": "M",
+    "SIZ": 60,
+    "hp": 12,
+    "free skill points": 390,
     "bonus damage": 0,
-    "INT": 0,
-    "STR": 0,
+    "INT": 85,
+    "STR": 70,
     "skills": [
         {
-            "Skill name": "Kick",
-            "Skill points": 50
+            "Skill name": "Club",
+            "Skill points": 0
         },
         {
-            "Skill name": "Sleep",
-            "Skill points": 30
+            "Skill name": "Drive Automobile",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Firearms",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Law",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Fist/Punch",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Grapple",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Kick",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Track",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "Persuade",
+            "Skill points": 0
+        },
+        {
+            "Skill name": "cat",
+            "Skill points": 20
         }
     ],
-    "MOV": 0,
-    "DEX": 0,
-    "EDU": 0,
-    "name": "Ding",
-    "POW": 0,
-    "LUC": 0,
-    "job": "None",
-    "credit": 0,
-    "items": [],
-    "age": 0
+    "MOV": 8,
+    "DEX": 40,
+    "EDU": 50,
+    "name": "AA",
+    "POW": 60,
+    "LUC": 35,
+    "job": "Policeman",
+    "credit": 40,
+    "items": [{"Item name": "car"}],
+    "age": 22
 }
