@@ -34,10 +34,10 @@ public class Role implements Writable {
     private int credit;             // An indicator of character's wealth and class.
     private final List<Item> itemList;  // A list of items character has
     private final List<Skill> skillList;  // A list of skills character has
-    static final Random d3 = new Random();      // A dice with 3 faces
-    static final Random d6 = new Random();      // A dice with 6 faces
-    static final Random d20 = new Random();    // A dice with 20 faces
-    static final Random d100 = new Random();  // A dice with 100 faces
+    static final Random dice = new Random();      // A dice with arbitrary faces
+    //    static final Random d6 = new Random();      // A dice with 6 faces
+//    static final Random d20 = new Random();    // A dice with 20 faces
+//    static final Random d100 = new Random();  // A dice with 100 faces
     static final int MAX_STATES = 90;            // The limitation of character's states
 
     //EFFECTS: creat a new character card with no data stored.
@@ -188,15 +188,15 @@ public class Role implements Writable {
     //EFFECTS: set up character's states with random numbers.(The function of calculating states
     // obeys the Call of Cthulhu Quick-Start Rules 7th Edition)
     public void setStates() {
-        this.strength = (this.rollD6() + this.rollD6() + this.rollD6()) * 5;
-        this.constitution = (this.rollD6() + this.rollD6() + this.rollD6()) * 5;
-        this.size = (this.rollD6() + this.rollD6() + 6) * 5;
-        this.dexterity = (this.rollD6() + this.rollD6() + this.rollD6()) * 5;
-        this.appearance = (this.rollD6() + this.rollD6() + this.rollD6()) * 5;
-        this.intelligence = (this.rollD6() + this.rollD6() + 6) * 5;
-        this.power = (this.rollD6() + this.rollD6() + this.rollD6()) * 5;
-        this.education = (this.rollD6() + this.rollD6() + 6) * 5;
-        this.luck = (this.rollD6() + this.rollD6() + this.rollD6()) * 5;
+        this.strength = (this.roll(6) + this.roll(6) + this.roll(6)) * 5;
+        this.constitution = (this.roll(6) + this.roll(6) + this.roll(6)) * 5;
+        this.size = (this.roll(6) + this.roll(6) + 6) * 5;
+        this.dexterity = (this.roll(6) + this.roll(6) + this.roll(6)) * 5;
+        this.appearance = (this.roll(6) + this.roll(6) + this.roll(6)) * 5;
+        this.intelligence = (this.roll(6) + this.roll(6) + 6) * 5;
+        this.power = (this.roll(6) + this.roll(6) + this.roll(6)) * 5;
+        this.education = (this.roll(6) + this.roll(6) + 6) * 5;
+        this.luck = (this.roll(6) + this.roll(6) + this.roll(6)) * 5;
     }
 
     public int getStrength() {
@@ -384,24 +384,24 @@ public class Role implements Writable {
     }
 
     //EFFECTS: return a result of rolling 3 faces dice
-    public int rollD3() {
-        return d3.nextInt(3) + 1;
+    public int roll(int faces) {
+        return dice.nextInt(faces) + 1;
     }
-
-    //EFFECTS: return a result of rolling 6 faces dice
-    public int rollD6() {
-        return d6.nextInt(6) + 1;
-    }
-
-    //EFFECTS: return a result of rolling 20 faces dice
-    public int rollD20() {
-        return d20.nextInt(20) + 1;
-    }
-
-    //EFFECTS: return a result of rolling 100 faces dice
-    public int rollD100() {
-        return d100.nextInt(100) + 1;
-    }
+//
+//    //EFFECTS: return a result of rolling 6 faces dice
+//    public int roll(6) {
+//        return d6.nextInt(6) + 1;
+//    }
+//
+//    //EFFECTS: return a result of rolling 20 faces dice
+//    public int rollD20() {
+//        return d20.nextInt(20) + 1;
+//    }
+//
+//    //EFFECTS: return a result of rolling 100 faces dice
+//    public int rollD100() {
+//        return d100.nextInt(100) + 1;
+//    }
 
     //REQUIRES: passed item should not exist in the item list
     //MODIFIES: this

@@ -129,6 +129,33 @@ public class RoleMaker implements ActionListener {
         panel.add(button);
     }
 
+    //EFFECTS: ask users to input the faces of dice they want to use
+    // and how many time they want to roll.
+    // Than display the result of rolling
+    public void roll(Role role) {
+//
+        mainMenu();
+        panel.removeAll();
+        JButton button1 = new JButton("Roll");
+        JTextField field1 = new JTextField(5);
+        panel.add(new JLabel("Please enter faces of dice:"));
+        panel.add(field1);
+        JTextField field2 = new JTextField(5);
+        panel.add(new JLabel("Please enter times you want to roll:"));
+        panel.add(field2);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+                                      public void actionPerformed(ActionEvent e) {
+                                          rollHelper(parseInt(field1.getText()), parseInt(field2.getText()));
+                                      }
+                                  }
+        );
+        setBackToMainButton();
+        panel.revalidate();
+        panel.repaint();
+    }
+
     //MODIFIES: this
     //EFFECTS: creat a button that display role card
     public void setDisplayButton() {
@@ -1182,42 +1209,16 @@ public class RoleMaker implements ActionListener {
         }
     }
 
-    //EFFECTS: ask users to input the faces of dice they want to use
-    // and how many time they want to roll.
-    // Than display the result of rolling
-    public void roll(Role role) {
-        System.out.println("\nPlease enter faces of dice(3,6,20,100)");
-        int choiceDice = input.nextInt();
-        input.nextLine();
-        System.out.println("\nPlease enter times you want to roll");
-        int choiceTimes = input.nextInt();
-        input.nextLine();
-        rollHelper(choiceDice, choiceTimes);
-        mainMenu();
-    }
-
     //EFFECT: roll the chosen dice for the chosen time.
     // Then, display the result.
     public void rollHelper(int choiceDice, int choiceTimes) {
         int total = 0;
-        if (choiceDice == 3) {
-            for (int i = 0; i < choiceTimes; i++) {
-                total += role.rollD3();
-            }
-        } else if (choiceDice == 6) {
-            for (int i = 0; i < choiceTimes; i++) {
-                total += role.rollD6();
-            }
-        } else if (choiceDice == 20) {
-            for (int i = 0; i < choiceTimes; i++) {
-                total += role.rollD20();
-            }
-        } else if (choiceDice == 100) {
-            for (int i = 0; i < choiceTimes; i++) {
-                total += role.rollD100();
-            }
+        for (int i = 0; i < choiceTimes; i++) {
+            total += role.roll(choiceDice);
         }
-        System.out.println(choiceTimes + " D" + choiceDice + ": " + total);
+        panel.add(new JLabel(choiceTimes + " D" + choiceDice + ": " + total + " out of " + choiceDice * choiceTimes));
+        panel.revalidate();
+        panel.repaint();
     }
 
 

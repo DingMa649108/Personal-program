@@ -473,10 +473,10 @@ public class TestRole {
     @Test
     public void dicesInRange() {
         for (int i = 0; i < 100; i++) {
-            assertTrue(1 <= role.rollD3() && role.rollD3() <= 3);
-            assertTrue(1 <= role.rollD6() && role.rollD6() <= 6);
-            assertTrue(1 <= role.rollD20() && role.rollD20() <= 20);
-            assertTrue(1 <= role.rollD100() && role.rollD100() <= 100);
+            assertTrue(1 <= role.roll(3) && role.roll(3) <= 3);
+            assertTrue(1 <= role.roll(6) && role.roll(6) <= 6);
+            assertTrue(1 <= role.roll(20) && role.roll(20) <= 20);
+            assertTrue(1 <= role.roll(100) && role.roll(100) <= 100);
         }
     }
 
@@ -485,10 +485,10 @@ public class TestRole {
         int count = 0;
         Role role2 = new Role();
         for (int i = 0; i < 100; i++) {
-            if (role.rollD3() == role2.rollD3()
-                    && role.rollD6() == role2.rollD6()
-                    && role.rollD20() == role2.rollD20()
-                    && role.rollD100() == role2.rollD100()) {
+            if (role.roll(3) == role2.roll(3)
+                    && role.roll(6) == role2.roll(6)
+                    && role.roll(20) == role2.roll(20)
+                    && role.roll(100) == role2.roll(100)) {
                 count++;
             }
         }
