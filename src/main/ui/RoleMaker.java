@@ -44,12 +44,12 @@ public class RoleMaker implements ActionListener {
         label = new JLabel();
 
         panel = new JPanel();
-        panel.setBorder(BorderFactory.createEmptyBorder(100,100,100,100));
-        panel.setLayout(new GridLayout(0,1));
+        panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+        panel.setLayout(new GridLayout(0, 1));
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(1000,1000);
+        frame.setSize(1000, 1000);
         frame.setVisible(true);
         frame.setResizable(true);
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -81,7 +81,7 @@ public class RoleMaker implements ActionListener {
         setSaveButton();
         setLoadButton();
         setQuitButton();
-        frame.add(panel,BorderLayout.CENTER);
+        frame.add(panel, BorderLayout.CENTER);
         panel.revalidate();
         panel.repaint();
     }
@@ -201,7 +201,6 @@ public class RoleMaker implements ActionListener {
     }
 
 
-
     //MODIFIES: this
     //EFFECTS: display the role menu and allow users to creat and manage their role card
     // 1.set name for role
@@ -235,10 +234,10 @@ public class RoleMaker implements ActionListener {
         JMenuItem setName = new JMenuItem("set name");
         name.add(setName);
         setName.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setNameButton();
-                    }
-                }
+                                      public void actionPerformed(ActionEvent e) {
+                                          setNameButton();
+                                      }
+                                  }
         );
         menuBar.add(name);
     }
@@ -254,11 +253,11 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                role.setName(field.getText());
-                cardMenu(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.setName(field.getText());
+                                          cardMenu(role);
+                                      }
+                                  }
         );
         panel.revalidate();
         panel.repaint();
@@ -271,10 +270,10 @@ public class RoleMaker implements ActionListener {
         JMenuItem setAge = new JMenuItem("set age");
         age.add(setAge);
         setAge.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setAgeButton();
-            }
-        }
+                                     public void actionPerformed(ActionEvent e) {
+                                         setAgeButton();
+                                     }
+                                 }
         );
         menuBar.add(age);
     }
@@ -290,12 +289,12 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int age = parseInt(field.getText());
-                role.setAge(age);
-                cardMenu(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          int age = parseInt(field.getText());
+                                          role.setAge(age);
+                                          cardMenu(role);
+                                      }
+                                  }
         );
         panel.revalidate();
         panel.repaint();
@@ -308,10 +307,10 @@ public class RoleMaker implements ActionListener {
         JMenuItem setGender = new JMenuItem("set gender");
         gender.add(setGender);
         setGender.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setGenderButton();
-            }
-        }
+                                        public void actionPerformed(ActionEvent e) {
+                                            setGenderButton();
+                                        }
+                                    }
         );
         menuBar.add(gender);
     }
@@ -327,11 +326,11 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                role.setGender(field.getText());
-                cardMenu(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.setGender(field.getText());
+                                          cardMenu(role);
+                                      }
+                                  }
         );
         panel.revalidate();
         panel.repaint();
@@ -344,16 +343,16 @@ public class RoleMaker implements ActionListener {
         JMenuItem setJob = new JMenuItem("set job");
         job.add(setJob);
         setJob.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panel.removeAll();
-                panel.add(new JLabel("Please select job for your role"));
-                setJobButtonArtist();
-                setJobButtonNurse();
-                setJobButtonPoliceman();
-                panel.revalidate();
-                panel.repaint();
-            }
-        }
+                                     public void actionPerformed(ActionEvent e) {
+                                         panel.removeAll();
+                                         panel.add(new JLabel("Please select job for your role"));
+                                         setJobButtonArtist();
+                                         setJobButtonNurse();
+                                         setJobButtonPoliceman();
+                                         panel.revalidate();
+                                         panel.repaint();
+                                     }
+                                 }
         );
         menuBar.add(job);
     }
@@ -365,11 +364,11 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                role.setJobArtist();
-                cardMenu(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.setJobArtist();
+                                          cardMenu(role);
+                                      }
+                                  }
         );
     }
 
@@ -380,11 +379,11 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                role.setJobNurse();
-                cardMenu(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.setJobNurse();
+                                          cardMenu(role);
+                                      }
+                                  }
         );
     }
 
@@ -395,11 +394,11 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                role.setJobPoliceman();
-                cardMenu(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.setJobPoliceman();
+                                          cardMenu(role);
+                                      }
+                                  }
         );
     }
 
@@ -410,10 +409,10 @@ public class RoleMaker implements ActionListener {
         JMenuItem setStats = new JMenuItem("set stats");
         job.add(setStats);
         setStats.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setSetStatsButton(role);
-            }
-        }
+                                       public void actionPerformed(ActionEvent e) {
+                                           setSetStatsButton(role);
+                                       }
+                                   }
         );
         menuBar.add(job);
     }
@@ -461,7 +460,7 @@ public class RoleMaker implements ActionListener {
         JTextField field = new JTextField(5);
         panel.add(new JLabel("Your current items: "));
         String items = "";
-        for (Item item: role.getItemList()) {
+        for (Item item : role.getItemList()) {
             items += (item.getItemName() + ", ");
         }
         panel.add(new JLabel(items));
@@ -487,10 +486,10 @@ public class RoleMaker implements ActionListener {
         JMenuItem removeItem = new JMenuItem("Remove item");
         item.add(removeItem);
         removeItem.addActionListener(new ActionListener() {
-                                      public void actionPerformed(ActionEvent e) {
-                                          setRemoveItemButton(role);
-                                      }
-                                  }
+                                         public void actionPerformed(ActionEvent e) {
+                                             setRemoveItemButton(role);
+                                         }
+                                     }
         );
         menuBar.add(item);
     }
@@ -504,7 +503,7 @@ public class RoleMaker implements ActionListener {
         JTextField field = new JTextField(5);
         panel.add(new JLabel("Your current items: "));
         String items = "";
-        for (Item item: role.getItemList()) {
+        for (Item item : role.getItemList()) {
             items += (item.getItemName() + ", ");
         }
         panel.add(new JLabel(items));
@@ -524,16 +523,16 @@ public class RoleMaker implements ActionListener {
         panel.repaint();
     }
 
-    //MODIFIES: this 
+    //MODIFIES: this
     //EFFECTS: creat a menu item that add skill to role's skill list
     public void setSkillMenuItemAddSkill(JMenu skill) {
         JMenuItem setName = new JMenuItem("Add skill");
         skill.add(setName);
         setName.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setSetAddSkillButton(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          setSetAddSkillButton(role);
+                                      }
+                                  }
         );
         menuBar.add(skill);
     }
@@ -544,10 +543,10 @@ public class RoleMaker implements ActionListener {
         JMenuItem setName = new JMenuItem("Add skill points");
         skill.add(setName);
         setName.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setSetAddSkillPointsButton(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          setSetAddSkillPointsButton(role);
+                                      }
+                                  }
         );
         menuBar.add(skill);
     }
@@ -570,11 +569,11 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                role.addSkillsPoints(field.getText(), parseInt(field2.getText()));
-                cardMenu(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.addSkillsPoints(field.getText(), parseInt(field2.getText()));
+                                          cardMenu(role);
+                                      }
+                                  }
         );
         setBackRoleMenuButton();
         panel.revalidate();
@@ -587,10 +586,10 @@ public class RoleMaker implements ActionListener {
         JMenuItem setName = new JMenuItem("Remove skill points");
         skill.add(setName);
         setName.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setRemoveSkillPointsButton(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          setRemoveSkillPointsButton(role);
+                                      }
+                                  }
         );
         menuBar.add(skill);
     }
@@ -613,11 +612,11 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                role.removeSkillPoints(field.getText(), parseInt(field2.getText()));
-                cardMenu(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.removeSkillPoints(field.getText(), parseInt(field2.getText()));
+                                          cardMenu(role);
+                                      }
+                                  }
         );
         setBackRoleMenuButton();
         panel.revalidate();
@@ -630,10 +629,10 @@ public class RoleMaker implements ActionListener {
         JMenuItem setName = new JMenuItem("Remove skill");
         skill.add(setName);
         setName.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setRemoveSkillButton(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          setRemoveSkillButton(role);
+                                      }
+                                  }
         );
         menuBar.add(skill);
     }
@@ -653,11 +652,11 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                role.removeSkill(field.getText());
-                cardMenu(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.removeSkill(field.getText());
+                                          cardMenu(role);
+                                      }
+                                  }
         );
         setBackRoleMenuButton();
         panel.revalidate();
@@ -670,10 +669,10 @@ public class RoleMaker implements ActionListener {
         JMenuItem getStrength = new JMenuItem("Get strength");
         skill.add(getStrength);
         getStrength.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setGetStrengthButton();
-            }
-        }
+                                          public void actionPerformed(ActionEvent e) {
+                                              setGetStrengthButton();
+                                          }
+                                      }
         );
         menuBar.add(skill);
     }
@@ -686,21 +685,21 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panel.removeAll();
-                List<Skill> skillList = new ArrayList<>();
-                for (Skill s : role.getSkillList()) {
-                    if (s.getSkillPoints() >= 45) {
-                        skillList.add(s);
-                    }
-                }
-                panel.add(new JLabel("Your role has following strength: "));
-                panel.add(new JLabel(skillList.toString()));
-                setBackRoleMenuButton();
-                panel.revalidate();
-                panel.repaint();
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          panel.removeAll();
+                                          List<Skill> skillList = new ArrayList<>();
+                                          for (Skill s : role.getSkillList()) {
+                                              if (s.getSkillPoints() >= 45) {
+                                                  skillList.add(s);
+                                              }
+                                          }
+                                          panel.add(new JLabel("Your role has following strength: "));
+                                          panel.add(new JLabel(skillList.toString()));
+                                          setBackRoleMenuButton();
+                                          panel.revalidate();
+                                          panel.repaint();
+                                      }
+                                  }
         );
         setBackRoleMenuButton();
         panel.revalidate();
@@ -714,10 +713,10 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cardMenu(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          cardMenu(role);
+                                      }
+                                  }
         );
     }
 
@@ -727,10 +726,10 @@ public class RoleMaker implements ActionListener {
         JMenuItem getStrength = new JMenuItem("Get weakness");
         skill.add(getStrength);
         getStrength.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setGetWeaknessButton();
-            }
-        }
+                                          public void actionPerformed(ActionEvent e) {
+                                              setGetWeaknessButton();
+                                          }
+                                      }
         );
         menuBar.add(skill);
     }
@@ -743,21 +742,21 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panel.removeAll();
-                List<Skill> skillList = new ArrayList<>();
-                for (Skill s : role.getSkillList()) {
-                    if (s.getSkillPoints() < 45) {
-                        skillList.add(s);
-                    }
-                }
-                panel.add(new JLabel("Your role has following weakness: "));
-                panel.add(new JLabel(skillList.toString()));
-                setBackRoleMenuButton();
-                panel.revalidate();
-                panel.repaint();
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          panel.removeAll();
+                                          List<Skill> skillList = new ArrayList<>();
+                                          for (Skill s : role.getSkillList()) {
+                                              if (s.getSkillPoints() < 45) {
+                                                  skillList.add(s);
+                                              }
+                                          }
+                                          panel.add(new JLabel("Your role has following weakness: "));
+                                          panel.add(new JLabel(skillList.toString()));
+                                          setBackRoleMenuButton();
+                                          panel.revalidate();
+                                          panel.repaint();
+                                      }
+                                  }
         );
         setBackRoleMenuButton();
         panel.revalidate();
@@ -783,11 +782,11 @@ public class RoleMaker implements ActionListener {
         frame.add(panel);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                role.addSkills(field.getText(), parseInt(field2.getText()));
-                cardMenu(role);
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.addSkills(field.getText(), parseInt(field2.getText()));
+                                          cardMenu(role);
+                                      }
+                                  }
         );
         setBackRoleMenuButton();
         panel.revalidate();
@@ -802,14 +801,14 @@ public class RoleMaker implements ActionListener {
         panel.add(button1);
         frame.add(panel);
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setUpStates(role);
-                role.addJobSkills();
-                cardMenu(role);
-                panel.revalidate();
-                panel.repaint();
-            }
-        }
+                                      public void actionPerformed(ActionEvent e) {
+                                          setUpStates(role);
+                                          role.addJobSkills();
+                                          cardMenu(role);
+                                          panel.revalidate();
+                                          panel.repaint();
+                                      }
+                                  }
         );
         panel.revalidate();
         panel.repaint();
@@ -873,7 +872,8 @@ public class RoleMaker implements ActionListener {
         }
         skillMenu(role);
     }
-//
+
+    //
     //MODIFIES: this
     //EFFECTS: add a new skill with name and skill points inputted by users
     public void addSkill(Role role) {
@@ -1022,7 +1022,7 @@ public class RoleMaker implements ActionListener {
         System.out.println("\nPlease enter times you want to roll");
         int choiceTimes = input.nextInt();
         input.nextLine();
-        rollHelper(choiceDice,choiceTimes);
+        rollHelper(choiceDice, choiceTimes);
         mainMenu();
     }
 
@@ -1140,7 +1140,7 @@ public class RoleMaker implements ActionListener {
         panel.add(new JLabel(role.getSkillList().toString()));
         panel.add(new JLabel("\nItems: "));
         String items = "";
-        for (Item item: role.getItemList()) {
+        for (Item item : role.getItemList()) {
             items += (item.getItemName() + ", ");
         }
         panel.add(new JLabel(items));
