@@ -86,6 +86,7 @@ public class RoleMaker implements ActionListener {
         panel.repaint();
     }
 
+
     //MODIFIES: this
     //EFFECTS: creat a button that calls card menu
     public void setRoleCardButton() {
@@ -223,6 +224,161 @@ public class RoleMaker implements ActionListener {
         setItemMenu();
         frame.setJMenuBar(menuBar);
         displayRoleCard(role);
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: display the skill menu and allow users to creat and manage their skills
+    // 1.add hit points for user's role
+    // 2.reduce hit points for user's role
+    // 3.add sanity for user's role
+    // 4.reduce sanity for user's role
+    // 5.back to previous menu
+    public void actionMenu(Role role) {
+        panel.removeAll();
+        JLabel label = new JLabel("Please choose one of following:");
+        menuBar = new JMenuBar();
+        panel.add(label);
+        setHPMenu();
+        setSANMenu();
+        setBackToMainButton();
+        frame.setJMenuBar(menuBar);
+        displayRoleCard(role);
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu and menu item that change role's HP
+    public void setHPMenu() {
+        JMenu hp = new JMenu("HP");
+        JMenuItem addHP = new JMenuItem("add HP");
+        hp.add(addHP);
+        addHP.addActionListener(new ActionListener() {
+                                    public void actionPerformed(ActionEvent e) {
+                                        setAddHPButton();
+                                    }
+                                }
+        );
+        JMenuItem reduceHP = new JMenuItem("reduce HP");
+        hp.add(reduceHP);
+        reduceHP.addActionListener(new ActionListener() {
+                                       public void actionPerformed(ActionEvent e) {
+                                           setReduceHPButton();
+                                       }
+                                   }
+        );
+        menuBar.add(hp);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a filed that accepts user's input and button that add input value to role's HP
+    public void setAddHPButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("add HP");
+        JTextField field = new JTextField(5);
+        panel.add(new JLabel("Please enter number of HP you want to add to your role:"));
+        panel.add(field);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.addHP(parseInt(field.getText()));
+                                          actionMenu(role);
+                                      }
+                                  }
+        );
+        setBackActionMenuButton();
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a filed that accepts user's input and button that reduce input value from role's HP
+    public void setReduceHPButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("reduce HP");
+        JTextField field = new JTextField(5);
+        panel.add(new JLabel("Please enter number of HP you want to reduce from your role:"));
+        panel.add(field);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.removeHP(parseInt(field.getText()));
+                                          actionMenu(role);
+                                      }
+                                  }
+        );
+        setBackActionMenuButton();
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu and menu item that change role's SAN
+    public void setSANMenu() {
+        JMenu san = new JMenu("SAN");
+        JMenuItem addSAN = new JMenuItem("add SAN");
+        san.add(addSAN);
+        addSAN.addActionListener(new ActionListener() {
+                                     public void actionPerformed(ActionEvent e) {
+                                         setAddSANButton();
+                                     }
+                                 }
+        );
+        JMenuItem reduceHP = new JMenuItem("reduce SAN");
+        san.add(reduceHP);
+        reduceHP.addActionListener(new ActionListener() {
+                                       public void actionPerformed(ActionEvent e) {
+                                           setReduceSANButton();
+                                       }
+                                   }
+        );
+        menuBar.add(san);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a filed that accepts user's input and button that add input value to role's SAN
+    public void setAddSANButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("add SAN");
+        JTextField field = new JTextField(5);
+        panel.add(new JLabel("Please enter number of SAN you want to add to your role:"));
+        panel.add(field);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.addSan(parseInt(field.getText()));
+                                          actionMenu(role);
+                                      }
+                                  }
+        );
+        setBackActionMenuButton();
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a filed that accepts user's input and button that reduce input value from role's SAN
+    public void setReduceSANButton() {
+        panel.removeAll();
+        JButton button1 = new JButton("reduce SAN");
+        JTextField field = new JTextField(5);
+        panel.add(new JLabel("Please enter number of SAN you want to reduce from your role:"));
+        panel.add(field);
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+                                      public void actionPerformed(ActionEvent e) {
+                                          role.removeSan(parseInt(field.getText()));
+                                          actionMenu(role);
+                                      }
+                                  }
+        );
+        setBackActionMenuButton();
         panel.revalidate();
         panel.repaint();
     }
@@ -707,7 +863,7 @@ public class RoleMaker implements ActionListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: creat a menu item that allows user to go back to card menu
+    //EFFECTS: creat a menu item that allows user to go back to role menu
     public void setBackRoleMenuButton() {
         JButton button1 = new JButton("Back");
         panel.add(button1);
@@ -715,6 +871,20 @@ public class RoleMaker implements ActionListener {
         button1.addActionListener(new ActionListener() {
                                       public void actionPerformed(ActionEvent e) {
                                           cardMenu(role);
+                                      }
+                                  }
+        );
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creat a menu item that allows user to go back to action menu
+    public void setBackActionMenuButton() {
+        JButton button1 = new JButton("Back");
+        panel.add(button1);
+        frame.add(panel);
+        button1.addActionListener(new ActionListener() {
+                                      public void actionPerformed(ActionEvent e) {
+                                          actionMenu(role);
                                       }
                                   }
         );
@@ -1050,37 +1220,6 @@ public class RoleMaker implements ActionListener {
         System.out.println(choiceTimes + " D" + choiceDice + ": " + total);
     }
 
-    //MODIFIES: this
-    //EFFECTS: display the skill menu and allow users to creat and manage their skills
-    // 1.add hit points for user's role
-    // 2.reduce hit points for user's role
-    // 3.add sanity for user's role
-    // 4.reduce sanity for user's role
-    // 5.back to previous menu
-    public void actionMenu(Role role) {
-        System.out.println("\nPlease choose one of following");
-        System.out.println("1. Add Hp\n" + "2. Reduce HP\n" + "3. Add SAN\n"
-                + "4. Reduce San\n" + "5. Previous menu");
-        int choice = input.nextInt();
-        input.nextLine();
-        if (choice == 1) {
-            System.out.println("Please enter number of HP you want to add");
-            role.addHP(input.nextInt());
-        } else if (choice == 2) {
-            System.out.println("Please enter number of HP you want to reduce");
-            role.removeHP(input.nextInt());
-        } else if (choice == 3) {
-            System.out.println("Please enter number of SAN you want to add");
-            role.addSan(input.nextInt());
-        } else if (choice == 4) {
-            System.out.println("Please enter number of SAN you want to reduce");
-            role.removeSan(input.nextInt());
-        } else if (choice == 5) {
-            mainMenu();
-        }
-        input.nextLine();
-        actionMenu(role);
-    }
 
     //MODIFIES: this
     //EFFECTS: set up user's role's states,
