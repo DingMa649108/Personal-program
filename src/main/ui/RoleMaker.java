@@ -524,7 +524,7 @@ public class RoleMaker implements ActionListener {
         panel.repaint();
     }
 
-    //MODIFIES: this
+    //MODIFIES: this 
     //EFFECTS: creat a menu item that add skill to role's skill list
     public void setSkillMenuItemAddSkill(JMenu skill) {
         JMenuItem setName = new JMenuItem("Add skill");
